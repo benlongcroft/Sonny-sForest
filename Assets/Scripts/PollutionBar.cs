@@ -7,6 +7,8 @@ public class PollutionBar : MonoBehaviour
 {
     public static PollutionBar instance { get; private set; }
     public Image mask;
+
+    private int pollution = 100;
     float originalSize;
     // Start is called before the first frame update
     void Awake()
@@ -20,7 +22,13 @@ public class PollutionBar : MonoBehaviour
         originalSize = mask.rectTransform.rect.width;
     }
 
-    public void SetValue(float value)
+    public void PlantTree()
+    {
+        pollution = pollution - 1;
+        SetValue(pollution/100f);
+    }
+    
+    void SetValue(float value)
     {
         mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, originalSize * value);
     }

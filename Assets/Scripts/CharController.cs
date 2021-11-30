@@ -31,6 +31,7 @@ public class CharController : MonoBehaviour
     void Plant()
     {
         GameObject treeObj = Instantiate(treePrefab, rigidbody2d.position+Vector2.up*0.5f, Quaternion.identity);
+        PollutionBar.instance.PlantTree();
         // TreeController tree = treeObj.GetComponent<TreeController>();
         // tree.Plant();
     }

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CharController : MonoBehaviour
 {
-    public GameObject treePrefab;
+    public GameObject plotPrefab;
     Rigidbody2D rigidbody2d;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class CharController : MonoBehaviour
 
     void Plant()
     {
-        GameObject treeObj = Instantiate(treePrefab, rigidbody2d.position+Vector2.up*0.5f, Quaternion.identity);
+        GameObject plotObj = Instantiate(plotPrefab, rigidbody2d.position+Vector2.up*1.2f, Quaternion.identity);
         PollutionBar.instance.PlantTree();
         // TreeController tree = treeObj.GetComponent<TreeController>();
         // tree.Plant();

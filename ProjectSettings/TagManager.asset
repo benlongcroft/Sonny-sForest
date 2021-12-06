@@ -11,7 +11,7 @@ TagManager:
   - Trees
   - Water
   - UI
-  - 
+  - plots
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: plots
+    uniqueID: 1275237805
+    locked: 0
+  - name: char
+    uniqueID: 581984075
     locked: 0

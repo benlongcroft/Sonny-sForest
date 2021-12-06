@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4603a4e0da949768a6b78bca92d307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treePrefab: {fileID: 5018478619798531094, guid: 419f0aff647324fcd8da58c3c0ed36c6, type: 3}
+  plotPrefab: {fileID: 1979283455861430679, guid: 0e23b612cc295471f8b0cd9186bd4a28, type: 3}
 --- !u!212 &5643626817210109365
 SpriteRenderer:
   m_ObjectHideFlags: 0

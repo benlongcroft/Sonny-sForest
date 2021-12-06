@@ -57,4 +57,9 @@ public class subPlotController : MonoBehaviour
     {
         seeded = !seeded;
     }
+
+    public int getCurrentState()
+    {
+        return currentState;
+    }
 }

@@ -25,24 +25,16 @@ public class CharController : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.P))
         {
-            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, new Vector2(1,0), 1.5f, LayerMask.GetMask("plots"));
+            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, new Vector2(-1,0), 1.5f, LayerMask.GetMask("plots"));
             if (hit.collider != null)
             {
                 subPlotController objHit = hit.collider.gameObject.GetComponent<subPlotController>();
-                objHit.FlipSeeded();
-                PollutionBar.instance.PlantTree();
+                if (objHit.getCurrentState() == 0)
+                {
+                    objHit.FlipSeeded();
+                    PollutionBar.instance.PlantTree();
+                }
             }
         }
-    }
-
-    void Plant(PlotController plot)
-    {
-        //How do we get the plot that the user hit and make that the plot that is assigned to assign a subplot to grow
-        // GameObject plotObj = Instantiate(plotPrefab, rigidbody2d.position+Vector2.up*1.2f, Quaternion.identity);
-        // PlotController p = plot.GetComponent<PlotController>();
-        plot.growOne();
-        PollutionBar.instance.PlantTree();
-        // TreeController tree = treeObj.GetComponent<TreeController>();
-        // tree.Plant();
     }
 }

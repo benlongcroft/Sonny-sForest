@@ -54,7 +54,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\OpenShop.cs" />
      <Compile Include="Assets\Scripts\PollutionBar.cs" />
-     <Compile Include="Assets\Scripts\PlotController.cs" />
      <Compile Include="Assets\Scripts\subPlotController.cs" />
      <Compile Include="Assets\Scripts\CharController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

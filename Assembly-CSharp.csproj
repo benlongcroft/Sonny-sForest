@@ -52,10 +52,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\OpenShop.cs" />
-     <Compile Include="Assets\Scripts\PollutionBar.cs" />
-     <Compile Include="Assets\Scripts\subPlotController.cs" />
-     <Compile Include="Assets\Scripts\CharController.cs" />
+     <Compile Include="Assets\Scripts\controllers\OpenShop.cs" />
+     <Compile Include="Assets\Scripts\controllers\PollutionBar.cs" />
+     <Compile Include="Assets\Scripts\controllers\subPlotController.cs" />
+     <Compile Include="Assets\Scripts\controllers\CharController.cs" />
+     <Compile Include="Assets\Scripts\Tree.cs" />
+     <Compile Include="Assets\Scripts\gsoController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

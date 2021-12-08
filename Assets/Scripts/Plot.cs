@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Plot : MonoBehaviour
 {
-    public List<Tree> trees = new List<Tree> {null, null, null, null};
-    public List<subPlotController> subPlots = new List<subPlotController> {null, null, null, null};
+    public Tree[] trees = new Tree[4];
+    public subPlotController[] subPlots = new subPlotController[4];
     private bool empty;
     public Plot(bool empty = true)
     {
@@ -15,7 +15,7 @@ public class Plot : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < 3; i = i + 1)
+        for (int i = 0; i < 4; i = i + 1)
         {
             if (trees[i] != null && subPlots[i] != null)
             {

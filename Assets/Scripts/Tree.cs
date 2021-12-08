@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Tree : MonoBehaviour
 {
-    public string stage; //seedling-sapling-tree-ancient
+    public string stage; //seed-seedling-sapling-tree-ancient-dead
     public int hardiness; //%
     public int pollutionThreshold; //%
     public int lifespan; //hours
@@ -26,7 +26,7 @@ public class Tree : MonoBehaviour
         this.lifespan = lifespan;
         this.seedGrowthTime = seedGrowthTime;
         this.diseaseResistance = diseaseResistance;
-        this.stage = "seedling";
+        this.stage = "seed";
         this.path = path;
     }
         

@@ -59,7 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1348acb3e21485fa77b52841bfd4010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trees: []
+  trees:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   subPlots:
   - {fileID: 1756028159348208555}
   - {fileID: 5830391207203189726}

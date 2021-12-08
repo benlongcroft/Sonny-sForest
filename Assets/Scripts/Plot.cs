@@ -17,7 +17,7 @@ public class Plot : MonoBehaviour
     {
         for (int i = 0; i < 4; i = i + 1)
         {
-            if (trees[i].active && subPlots[i].seeded == false)
+            if (trees[i] != null && subPlots[i].seeded == false)
             {
                 subPlots[i].SetTree(trees[i]);
             }
@@ -26,14 +26,14 @@ public class Plot : MonoBehaviour
     
     public bool choosePlot(Tree treeObj)
     {
-        for(int i =0; i < 3; i=i+1)
+        Debug.Log(treeObj.ToString());
+        for(int i =0; i < 4; i=i+1)
         {
-            if (trees[i].active == false)
+            if (trees[i] == null)
             {
                 treeObj.active = true;
                 trees[i] = treeObj;
                 return true;
-                break;
             }
         }
 

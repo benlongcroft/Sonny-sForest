@@ -20,7 +20,7 @@ public class gsoController
         string currentDirectory = Directory.GetCurrentDirectory();
         string json = JsonUtility.ToJson(forest);
         Debug.Log(json);
-        File.WriteAllText(currentDirectory+"/Assets/Scripts/forest_test.json", json);
+        File.WriteAllText(currentDirectory+"/Assets/GameObjects/forest_test.json", json);
     }
 
 }

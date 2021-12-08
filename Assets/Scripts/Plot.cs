@@ -17,26 +17,23 @@ public class Plot : MonoBehaviour
     {
         for (int i = 0; i < 4; i = i + 1)
         {
-            if (trees[i] != null && subPlots[i] != null)
+            if (trees[i].active && subPlots[i].seeded == false)
             {
-                subPlots[i].setTree(trees[i]);
+                subPlots[i].SetTree(trees[i]);
             }
         }
     }
-
-    public void setTree(int subPlotNum, Tree treeObj)
-    {
-        trees[subPlotNum] = treeObj;
-    }
-
+    
     public bool choosePlot(Tree treeObj)
     {
         for(int i =0; i < 3; i=i+1)
         {
-            if (trees[i] == null)
+            if (trees[i].active == false)
             {
+                treeObj.active = true;
                 trees[i] = treeObj;
                 return true;
+                break;
             }
         }
 

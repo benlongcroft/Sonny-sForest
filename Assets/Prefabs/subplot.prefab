@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 7898443963924902668}
   - component: {fileID: 1469455736854401138}
   - component: {fileID: -4291761809249034496}
-  - component: {fileID: 3287498874374917095}
   m_Layer: 6
   m_Name: subplot
   m_TagString: Untagged
@@ -179,33 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e962c60a07e84c78aa424a25d1ee97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sml: {fileID: 21300000, guid: 432494848cd5fa4488c8f90069b0982e, type: 3}
-  med: {fileID: 21300000, guid: 6199e367306afba4fb2b434ada112692, type: 3}
-  lrg: {fileID: 21300000, guid: 23e19a7533432f44fadd57a590b3b5be, type: 3}
   child: {fileID: 752969224982027977}
---- !u!61 &3287498874374917095
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3078285968330516914}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0056214333, y: 0.25139925}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.49784246, y: -0.0048545524}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.74141574, y: 0.39851075}
-  m_EdgeRadius: 0

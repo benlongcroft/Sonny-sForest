@@ -10,7 +10,7 @@ namespace controllers
     
         private SpriteRenderer spriteRenderer;
 
-        protected bool seeded = false;
+        public bool seeded = false;
 
         private float timer = 0;
 
@@ -61,10 +61,11 @@ namespace controllers
             return currentState;
         }
 
-        public void setTree(Tree t)
+        public void SetTree(Tree t)
         {
             tree = t;
             seeded = true;
+            Debug.Log("Tree Planted");
 
         }
     }

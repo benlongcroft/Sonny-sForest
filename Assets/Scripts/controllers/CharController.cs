@@ -29,14 +29,12 @@ namespace controllers
                 {
                     Debug.Log("Collision!");
                     //insert select seed routine here
-                    Plot objHit = hit.collider.gameObject.GetComponent<Plot>();
-                    objHit.choosePlot(new Tree(20, 87, 30, 1, 29, null));
-                    // if (objHit.getCurrentState() == 0)
-                    // {
-                    //     Debug.Log("Tree Planted");
-                    //     objHit.FlipSeeded();
-                    //     PollutionBar.instance.PlantTree();
-                    // }
+                    var objHit = hit.collider.gameObject.GetComponent<Plot>();
+                    bool success = objHit.choosePlot(new Tree(20, 87, 30, 1, 29, null));
+                    if (!success)
+                    {
+                        Debug.Log("Plot is FULL!");
+                    }
                 }
             }
         }

@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Tree : MonoBehaviour
+public class Tree
 {
-    public string stage; //seed-seedling-sapling-tree-ancient-dead
+    public string stage = "seed"; //seed-seedling-sapling-tree-ancient-dead
     public int hardiness; //%
     public int pollutionThreshold; //%
     public int lifespan; //hours
@@ -12,6 +12,7 @@ public class Tree : MonoBehaviour
     public int diseaseResistance; //% (usually low)
 
     private string path;
+    public bool active = false;
 
     public Sprite seedSprite;
     public Sprite seedlingSprite;

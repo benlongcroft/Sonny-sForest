@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - plots
-  - 
+  - char
   - 
   - 
   - 
@@ -45,5 +45,5 @@ TagManager:
     uniqueID: 1275237805
     locked: 0
   - name: char
-    uniqueID: 581984075
+    uniqueID: 2992549357
     locked: 0

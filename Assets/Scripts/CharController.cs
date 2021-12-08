@@ -25,12 +25,14 @@ public class CharController : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.P))
         {
-            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, new Vector2(-1,0), 1.5f, LayerMask.GetMask("plots"));
+            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
             if (hit.collider != null)
             {
+                Debug.Log("Collision!");
                 subPlotController objHit = hit.collider.gameObject.GetComponent<subPlotController>();
                 if (objHit.getCurrentState() == 0)
                 {
+                    Debug.Log("Tree Planted");
                     objHit.FlipSeeded();
                     PollutionBar.instance.PlantTree();
                 }

@@ -24,12 +24,3 @@ public class gsoController
     }
 
 }
-
-class main
-{
-    public static void Main(string[] args)
-    {
-        var t = new global::Tree(20, 87,30,1,29, "/Users/benlongcroft/Documents/unity/TreeProto/Assets/Scripts");
-        gsoController.toJSON(t);
-    }
-}

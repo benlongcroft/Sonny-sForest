@@ -3,20 +3,17 @@ using System.Collections.Generic;
 
 public class Forest 
 {
-    struct field
+    private List<Field> fields;
+    public Forest(string json_path)
     {
-        public List<Tree> plot1;
-        public List<Tree> plot2;
-        public List<Tree> plot3;
-        public List<Tree> plot4;
-        public List<Tree> plot5;
-        public List<Tree> plot6;
-
-        public bool hasDefence;
-        
-    }
-    public Forest()
-    {
-        //forest has trees
+        if (json_path != null)
+        {
+            Forest forest = gsoController.fromJSON(json_path);
+            fields = forest.fields;
+        }
+        else
+        {
+            fields = new List<Field> {new Field(true), new Field(true)};
+        }
     }
 }

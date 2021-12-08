@@ -1,26 +1,26 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class gsoController
 {
-    public static global::Tree fromJSON(string path)
+    public static Forest fromJSON(string path)
     {
-        global::Tree loadedTree = null;
+        Forest loadedForest= null;
         if (path != null)
         {
-            loadedTree = JsonUtility.FromJson<global::Tree>(path);
+            loadedForest = JsonUtility.FromJson<Forest>(path);
         }
 
-        return loadedTree;
+        return loadedForest;
     }
 
-    public static bool toJSON(global::Tree tree)
+    public static void toJSON(Forest forest)
     {
         string currentDirectory = Directory.GetCurrentDirectory();
-        string json = JsonUtility.ToJson(tree);
+        string json = JsonUtility.ToJson(forest);
         Debug.Log(json);
-        File.WriteAllText(currentDirectory+"/Assets/Scripts/tree_test.json", json);
-        return true;
+        File.WriteAllText(currentDirectory+"/Assets/Scripts/forest_test.json", json);
     }
 
 }

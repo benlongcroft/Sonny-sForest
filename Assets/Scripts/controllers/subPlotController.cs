@@ -4,11 +4,7 @@ namespace controllers
 {
     public class subPlotController : MonoBehaviour
     {
-        public Sprite sml;
-
-        public Sprite med;
-
-        public Sprite lrg;
+        private Tree tree;
 
         public GameObject child;
     
@@ -22,8 +18,6 @@ namespace controllers
         // Start is called before the first frame update
         void Start()
         {
-            Tree tree = new Tree(20, 87,30,1,29, "/Users/benlongcroft/Documents/unity/TreeProto/Assets/Scripts");
-            gsoController.toJSON(tree);
             spriteRenderer = child.gameObject.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = null;
         }
@@ -40,13 +34,19 @@ namespace controllers
                     switch (currentState)
                     {
                         case 0:
-                            spriteRenderer.sprite = sml;
+                            spriteRenderer.sprite = tree.seedlingSprite;
                             break;
                         case 1:
-                            spriteRenderer.sprite = med;
+                            spriteRenderer.sprite = tree.saplingSprite;
                             break;
                         case 2:
-                            spriteRenderer.sprite = lrg;
+                            spriteRenderer.sprite = tree.treeSprite;
+                            break;
+                        case 3:
+                            spriteRenderer.sprite = tree.ancientSprite;
+                            break;
+                        case 4:
+                            spriteRenderer.sprite = tree.deadSprite;
                             break;
                     }
 
@@ -55,14 +55,17 @@ namespace controllers
                 }
             }    
         }
-        public void FlipSeeded()
-        {
-            seeded = !seeded;
-        }
 
         public int getCurrentState()
         {
             return currentState;
+        }
+
+        public void setTree(Tree t)
+        {
+            tree = t;
+            seeded = true;
+
         }
     }
 }

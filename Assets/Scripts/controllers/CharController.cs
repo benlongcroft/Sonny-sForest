@@ -28,13 +28,15 @@ namespace controllers
                 if (hit.collider != null)
                 {
                     Debug.Log("Collision!");
-                    subPlotController objHit = hit.collider.gameObject.GetComponent<subPlotController>();
-                    if (objHit.getCurrentState() == 0)
-                    {
-                        Debug.Log("Tree Planted");
-                        objHit.FlipSeeded();
-                        PollutionBar.instance.PlantTree();
-                    }
+                    //insert select seed routine here
+                    Plot objHit = hit.collider.gameObject.GetComponent<Plot>();
+                    objHit.choosePlot(new Tree(20, 87, 30, 1, 29, null));
+                    // if (objHit.getCurrentState() == 0)
+                    // {
+                    //     Debug.Log("Tree Planted");
+                    //     objHit.FlipSeeded();
+                    //     PollutionBar.instance.PlantTree();
+                    // }
                 }
             }
         }

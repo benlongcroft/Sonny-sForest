@@ -1,7 +1,8 @@
 using System;
+using UnityEngine;
 
 [Serializable]
-public class Tree
+public class Tree : MonoBehaviour
 {
     public string stage; //seedling-sapling-tree-ancient
     public int hardiness; //%
@@ -11,6 +12,13 @@ public class Tree
     public int diseaseResistance; //% (usually low)
 
     private string path;
+
+    public Sprite seedSprite;
+    public Sprite seedlingSprite;
+    public Sprite saplingSprite;
+    public Sprite treeSprite;
+    public Sprite ancientSprite;
+    public Sprite deadSprite;
     public Tree(int hardiness, int pollutionThreshold, int lifespan, int seedGrowthTime, int diseaseResistance, string path)
     {
         this.hardiness = hardiness;

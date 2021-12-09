@@ -10,7 +10,7 @@ public class Tree : MonoBehaviour
     public int lifespan; //hours
     public int seedGrowthTime; //hours
     public int diseaseResistance; //% (usually low)
-    
+    private readonly string name;
     public bool active = false;
 
     public Sprite seedSprite;
@@ -20,6 +20,10 @@ public class Tree : MonoBehaviour
     public Sprite ancientSprite;
     public Sprite deadSprite;
 
+    public Tree(string name)
+    {
+        this.name = name;
+    }
     public override string ToString()
     {
         return stage + "-" + hardiness + "-" + pollutionThreshold + "-" + lifespan + "-" + seedGrowthTime + "-" +

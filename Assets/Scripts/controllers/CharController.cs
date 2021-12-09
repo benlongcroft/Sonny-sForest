@@ -1,16 +1,43 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace controllers
 {
     public class CharController : MonoBehaviour
     {
-        private Tree _seedEquipped;
-        public GameObject plotPrefab;
+        private GameObject _loadout;
         Rigidbody2D rigidbody2d;
+
+        private Dictionary<string, int> seedInventory = new Dictionary<string, int>();
+        
         // Start is called before the first frame update
         void Start()
         {
             rigidbody2d = GetComponent<Rigidbody2D>();
+        }
+
+        void addToInventory(Tree treeType, int quantity)
+        {
+            if (seedInventory.ContainsKey(treeType.name))
+            {
+                seedInventory[treeType.name] += quantity;
+            }
+            else
+            {
+                seedInventory[treeType.name] = 1;
+            }
+        }
+
+        void removeFromInventory(Tree treeType, int quantity)
+        {
+            if (seedInventory.ContainsKey(treeType.name))
+            {
+                seedInventory[treeType.name] -= quantity;
+            }
+            else
+            {
+                Debug.Log("Cannot remove seed. Does not exist");
+            }
         }
 
         // Update is called once per frame
@@ -31,7 +58,7 @@ namespace controllers
                 {
                     GameObject objHit = hit.collider.gameObject;
                     LoadOut.instance.SetSprite(hit.collider.gameObject.GetComponent<SpriteRenderer>().sprite);
-                    _seedEquipped = hit.collider.gameObject.GetComponent<Tree>();
+                    _loadout = hit.collider.gameObject;
                     objHit.SetActive(false); // Destroy doesnt work so have to use this but need to garbage collect
                 }
                 
@@ -44,23 +71,27 @@ namespace controllers
                 {
                     Debug.Log("Collision!");
                     var objHit = hit.collider.gameObject.GetComponent<Plot>();
-                    Debug.Log(_seedEquipped);
-                    if (_seedEquipped != null)
+                    Debug.Log(_loadout);
+                    if (_loadout != null)
                     {
-                        bool success = objHit.choosePlot(_seedEquipped);
-                        if (!success)
+                        Tree isSeed = _loadout.GetComponent<Tree>();
+                        if (isSeed != null)
                         {
-                            Debug.Log("Plot is FULL!");
+                            bool success = objHit.choosePlot(isSeed);
+                            if (!success)
+                            {
+                                Debug.Log("Plot is FULL!");
+                            }
+                            else
+                            {
+                                _loadout = null;
+                                LoadOut.instance.SetSprite(null);
+                            }
                         }
                         else
                         {
-                            _seedEquipped = null;
-                            LoadOut.instance.SetSprite(null);
+                            Debug.Log("No Seed Equipped");
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("No Seed Equipped");
                     }
                 }
             }

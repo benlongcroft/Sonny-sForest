@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace controllers
@@ -7,37 +6,14 @@ namespace controllers
     {
         private GameObject _loadout;
         Rigidbody2D rigidbody2d;
+        public Field[] myForest = {};
 
-        private Dictionary<string, int> seedInventory = new Dictionary<string, int>();
-        
         // Start is called before the first frame update
         void Start()
         {
+            string cwd = System.IO.Directory.GetCurrentDirectory();
+            gsoController.getForestFromJson(cwd, myForest);
             rigidbody2d = GetComponent<Rigidbody2D>();
-        }
-
-        void addToInventory(Tree treeType, int quantity)
-        {
-            if (seedInventory.ContainsKey(treeType.name))
-            {
-                seedInventory[treeType.name] += quantity;
-            }
-            else
-            {
-                seedInventory[treeType.name] = 1;
-            }
-        }
-
-        void removeFromInventory(Tree treeType, int quantity)
-        {
-            if (seedInventory.ContainsKey(treeType.name))
-            {
-                seedInventory[treeType.name] -= quantity;
-            }
-            else
-            {
-                Debug.Log("Cannot remove seed. Does not exist");
-            }
         }
 
         // Update is called once per frame
@@ -57,8 +33,8 @@ namespace controllers
                 if (hit.collider != null)
                 {
                     GameObject objHit = hit.collider.gameObject;
-                    LoadOut.instance.SetSprite(hit.collider.gameObject.GetComponent<SpriteRenderer>().sprite);
-                    _loadout = hit.collider.gameObject;
+                    _loadout = objHit;
+                    LoadOut.instance.SetSprite(_loadout.GetComponent<SpriteRenderer>().sprite);
                     objHit.SetActive(false); // Destroy doesnt work so have to use this but need to garbage collect
                 }
                 
@@ -70,15 +46,15 @@ namespace controllers
                 if (hit.collider != null)
                 {
                     Debug.Log("Collision!");
-                    var objHit = hit.collider.gameObject.GetComponent<Plot>();
+                    Plot objHit = hit.collider.gameObject.GetComponent<Plot>();
                     Debug.Log(_loadout);
                     if (_loadout != null)
                     {
-                        Tree isSeed = _loadout.GetComponent<Tree>();
+                        treeController isSeed = _loadout.GetComponent<treeController>();
                         if (isSeed != null)
                         {
-                            bool success = objHit.choosePlot(isSeed);
-                            if (!success)
+                            int success = objHit.choosePlot(isSeed);
+                            if (success == -1)
                             {
                                 Debug.Log("Plot is FULL!");
                             }

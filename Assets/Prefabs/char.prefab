@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4603a4e0da949768a6b78bca92d307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plotPrefab: {fileID: 1979283455861430679, guid: 0e23b612cc295471f8b0cd9186bd4a28, type: 3}
+  myForest:
+  - {fileID: 0}
 --- !u!212 &5643626817210109365
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -84,8 +85,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1302417939
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300106, guid: b08e570699f1c8a4f9cc388204aef3bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

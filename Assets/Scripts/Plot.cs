@@ -1,17 +1,13 @@
-using System;
 using System.Collections.Generic;
-using controllers;
 using UnityEngine;
 
-public class Plot : MonoBehaviour
+public class Plot : Field
 {
-    public Tree[] trees = new Tree[4];
-    public subPlotController[] subPlots = new subPlotController[4];
-    private bool empty;
-    public Plot(bool empty = true)
-    {
-        this.empty = empty;
-    }
+    public List<treeController> trees = new List<treeController>{};
+    
+    public List<subPlotController> subPlots = new List<subPlotController> {};
+    
+    public int plotID;
 
     void Update()
     {
@@ -24,19 +20,19 @@ public class Plot : MonoBehaviour
         }
     }
     
-    public bool choosePlot(Tree treeObj)
+    public int choosePlot(treeController treeControllerObj)
     {
-        Debug.Log(treeObj.ToString());
+        Debug.Log(treeControllerObj.ToString());
         for(int i =0; i < 4; i=i+1)
         {
             if (trees[i] == null)
             {
-                treeObj.active = true;
-                trees[i] = treeObj;
-                return true;
+                treeControllerObj.active = true;
+                trees[i] = treeControllerObj;
+                return i;
             }
         }
 
-        return false;
+        return -1;
     }
 }

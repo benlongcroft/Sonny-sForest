@@ -1,72 +1,65 @@
+using System;
 using UnityEngine;
 
-namespace controllers
+[Serializable]
+public class subPlotController : Plot
 {
-    public class subPlotController : MonoBehaviour
+    public int subPlotID;
+    public bool seeded = false;
+    public float timer = 0;
+    public treeController treeController;
+    public GameObject child;
+    private SpriteRenderer spriteRenderer;
+    private int currentState = 0;
+    // Start is called before the first frame update
+    void Start()
     {
-        private Tree tree;
+        spriteRenderer = child.gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = null;
+    }
 
-        public GameObject child;
-    
-        private SpriteRenderer spriteRenderer;
 
-        public bool seeded = false;
-
-        private float timer = 0;
-
-        private int currentState = 0;
-        // Start is called before the first frame update
-        void Start()
+    // Update is called once per frame
+    void Update()
+    {
+        if (seeded) 
         {
-            spriteRenderer = child.gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = null;
-        }
-    
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (seeded) 
+            timer = timer + Time.deltaTime;
+            if (timer > 5)
             {
-                timer = timer + Time.deltaTime;
-                if (timer > 5)
+                gsoController.saveForestToJson(System.IO.Directory.GetCurrentDirectory(), this);
+                switch (currentState)
                 {
-                    switch (currentState)
-                    {
-                        case 0:
-                            spriteRenderer.sprite = tree.seedlingSprite;
-                            break;
-                        case 1:
-                            spriteRenderer.sprite = tree.saplingSprite;
-                            break;
-                        case 2:
-                            spriteRenderer.sprite = tree.treeSprite;
-                            break;
-                        case 3:
-                            spriteRenderer.sprite = tree.ancientSprite;
-                            break;
-                        case 4:
-                            spriteRenderer.sprite = tree.deadSprite;
-                            break;
-                    }
-
-                    currentState = currentState + 1;
-                    timer = 0;
+                    case 0:
+                        spriteRenderer.sprite = treeController.seedlingSprite;
+                        break;
+                    case 1:
+                        spriteRenderer.sprite = treeController.saplingSprite;
+                        break;
+                    case 2:
+                        spriteRenderer.sprite = treeController.treeSprite;
+                        break;
+                    case 3:
+                        spriteRenderer.sprite = treeController.ancientSprite;
+                        break;
+                    case 4:
+                        spriteRenderer.sprite = treeController.deadSprite;
+                        break;
                 }
-            }    
-        }
 
-        public int getCurrentState()
-        {
-            return currentState;
-        }
+                currentState = currentState + 1;
+                timer = 0;
+            }
+        }    
+    }
 
-        public void SetTree(Tree t)
-        {
-            tree = t;
-            seeded = true;
-            Debug.Log("Tree Planted");
+    public void SetTree(treeController t)
+    {
+        treeController = t;
+        seeded = true;
+        t.location = new[] {subPlotID, plotID, fieldID};
+        gsoController.saveForestToJson(System.IO.Directory.GetCurrentDirectory(), this);
+        Debug.Log("Tree Planted");
 
-        }
     }
 }

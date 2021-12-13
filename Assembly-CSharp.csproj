@@ -53,14 +53,13 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Plot.cs" />
-     <Compile Include="Assets\Scripts\Forest.cs" />
+     <Compile Include="Assets\Scripts\Field.cs" />
      <Compile Include="Assets\Scripts\controllers\LoadOut.cs" />
      <Compile Include="Assets\Scripts\controllers\OpenShop.cs" />
      <Compile Include="Assets\Scripts\controllers\PollutionBar.cs" />
-     <Compile Include="Assets\Scripts\Tree.cs" />
+     <Compile Include="Assets\Scripts\treeController.cs" />
      <Compile Include="Assets\Scripts\controllers\subPlotController.cs" />
      <Compile Include="Assets\Scripts\gsoController.cs" />
-     <Compile Include="Assets\Scripts\Field.cs" />
      <Compile Include="Assets\Scripts\controllers\CharController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

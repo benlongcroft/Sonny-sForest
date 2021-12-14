@@ -1,0 +1,6 @@
+Base path: '/Applications/Unity/Hub/Editor/2020.3.24f1/Unity.app/Contents', plugins path '/Applications/Unity/Hub/Editor/2020.3.24f1/PlaybackEngines'
+Cmd: initializeCompiler
+
+Cmd: compileComputeKernel
+  insize=1893 file=/Users/benlongcroft/Documents/Uni Year 2/Software Engineering Team Project/SonnysForest/Library/PackageCache/com.unity.cinemachine@2.6.11/Editor/EditorResources/CMWaveform.compute kernel=KCMWaveformClear cachingPP=1 ppOnly=0 stripLineD=0 buildPlatform=20 km=<UNITY_VERSION=202039> pKW=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR uKW=SHADER_STAGE_COMPUTE platform=gles3 flags=4096 ok=1 outsize=1537
+

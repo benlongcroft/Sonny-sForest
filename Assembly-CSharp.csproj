@@ -53,15 +53,15 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Plot.cs" />
-     <Compile Include="Assets\Scripts\Forest.cs" />
-     <Compile Include="Assets\Scripts\controllers\LoadOut.cs" />
-     <Compile Include="Assets\Scripts\controllers\PollutionBar.cs" />
-     <Compile Include="Assets\Scripts\Tree.cs" />
-     <Compile Include="Assets\Scripts\gsoController.cs" />
+     <Compile Include="Assets\Scripts\CharController.cs" />
      <Compile Include="Assets\Scripts\Field.cs" />
-     <Compile Include="Assets\Scripts\controllers\subPlotController.cs" />
-     <Compile Include="Assets\Scripts\controllers\CharController.cs" />
-     <Compile Include="Assets\Scripts\controllers\OpenShop.cs" />
+     <Compile Include="Assets\Scripts\PollutionBar.cs" />
+     <Compile Include="Assets\Scripts\LoadOut.cs" />
+     <Compile Include="Assets\Scripts\OpenShop.cs" />
+     <Compile Include="Assets\Scripts\treeController.cs" />
+     <Compile Include="Assets\Scripts\subPlotController.cs" />
+     <Compile Include="Assets\Scripts\gsoController.cs" />
+     <None Include="Assets\GameObjects\manifest.txt" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.24f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -750,6 +750,14 @@
     <ProjectReference Include="Unity.2D.SpriteShape.Runtime.csproj">
       <Project>{3c18af9b-c546-26fd-0f25-00c3b26c93ac}</Project>
       <Name>Unity.2D.SpriteShape.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{ab21f38f-0699-dcb8-9975-b6fbce2a2de8}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{3b5ac6cb-30d4-f70d-8f62-ade59a58b6c0}</Project>
+      <Name>Cinemachine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

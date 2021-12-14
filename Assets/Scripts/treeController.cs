@@ -25,5 +25,25 @@ public class treeController : MonoBehaviour
     public Sprite ancientSprite;
 
     public Sprite deadSprite;
-    
+
+    public Sprite setSprite()
+    {
+        switch (stage)
+        {
+            case "seed":
+                return seedSprite;
+            case "seedling":
+                return seedlingSprite;
+            case "sapling":
+                return saplingSprite;
+            case "tree":
+                return treeSprite;
+            case "ancient":
+                return ancientSprite;
+            case "dead":
+                return deadSprite;
+        }
+
+        return null;
+    }
 }

@@ -1,60 +1,83 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class gsoController
 {
-    private static int[] getIDs(string path)
+    private static List<int[]> getIDs(string manifestPath)
     {
-        int[] idsOut = new int[3];
-        string[] d = path.Split('/');
-        //split path 
-        string filename = d[d.Length - 1].Split('.')[0];
-        //get last item (i.e .json file) and split filename from file extension - get name and store in l
-        
-        idsOut[0] = int.Parse(filename[0].ToString());
-        idsOut[1] = int.Parse(filename[1].ToString());
-        idsOut[2] = int.Parse(filename[2].ToString());
-
-        return idsOut;
-    }
-    private static string[] getGameFiles(string cwd)
-    {
-        string[] files = new string[10];
-        cwd = Path.Combine(cwd, "Assets/GameObjects/forest");
-        // string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        DirectoryInfo d = new DirectoryInfo(cwd);
-        int x = 0;
-        foreach (var file in d.GetFiles("*.json"))
+        List<int[]> ids = new List<int[]>();
+        string[] sIDs = File.ReadAllLines(manifestPath);
+        foreach (string sid in sIDs)
         {
-            files[x] = file.FullName;
-            x = x + 1;
+            string[] id = sid.Split('-');
+            ids.Add(new int[]{Convert.ToInt32(id[0]), Convert.ToInt32(id[1]), Convert.ToInt32(id[2])}); 
         }
-
-        return files;
+        return ids;
     }
-    public static Field[] getForestFromJson(string cwd, Field[] myForest)
-    {
-        string[] paths = getGameFiles(cwd);
-        foreach (string p in paths)
-        {
-            if (p == null)
-            {
-                break;
-            }
 
-            int[] ids = getIDs(p);
-            var jsonString = File.ReadAllText(p);
-            JsonUtility.FromJsonOverwrite(jsonString, myForest[ids[0]].plots[ids[1]].subPlots[ids[2]]);
+    public static void UpdateTree(string cwd, subPlotController spToUpdate)
+    {
+        string manifestPath = Path.Combine(cwd, "Assets/GameObjects/manifest.txt");
+        int[] loc = spToUpdate.treeController.location;
+        if (File.Exists(manifestPath))
+        {
+            List<int[]> ids = getIDs(manifestPath);
+            foreach (int[] id in ids)
+            {
+                if (id.SequenceEqual(loc))
+                {
+                    string jsonSp = JsonUtility.ToJson(spToUpdate, true);
+                    string jsonT = JsonUtility.ToJson(spToUpdate.treeController, true);
+                    File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/sp_"+loc[0]+loc[1]+loc[2]+".json"), jsonSp);
+                    File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/t_"+loc[0]+loc[1]+loc[2]+".json"), jsonT);
+                }
+            }
+        }
+    }
+    public static Field[] ReadForest(string cwd, Field[] myForest)
+    {
+        string manifestPath = Path.Combine(cwd, "Assets/GameObjects/manifest.txt");
+        if (File.Exists(manifestPath))
+        {
+            List<int[]> ids = getIDs(manifestPath);
+            foreach (int[] loc in ids)
+            {
+                if (loc == null)
+                {
+                    break;
+                }
+                var jsonSp = File.ReadAllText(Path.Combine(cwd, "Assets/GameObjects/forest/sp_"+loc[0]+loc[1]+loc[2]+".json"));
+                var jsonT = File.ReadAllText(Path.Combine(cwd, "Assets/GameObjects/forest/t_"+loc[0]+loc[1]+loc[2]+".json"));
+                JsonUtility.FromJsonOverwrite(jsonSp, myForest[loc[0]].plots[loc[1]].subPlots[loc[2]]);
+                JsonUtility.FromJsonOverwrite(jsonT, myForest[loc[0]].plots[loc[1]].subPlots[loc[2]].treeController);
+                Debug.Log("GSO loaded "+myForest[loc[0]].plots[loc[1]].subPlots[loc[2]].treeController.stage);
+            }
         }
         return myForest;
     }
 
-    public static void saveForestToJson(string cwd, subPlotController sp)
+    public static void SaveNewTree(string cwd, subPlotController sp)
     {
-        string json = JsonUtility.ToJson(sp, true); 
-        Debug.Log(json);
-        string id = sp.treeController.location[0].ToString() + sp.treeController.location[1].ToString() + sp.treeController.location[2].ToString();
-        System.IO.File.WriteAllText(Path.Combine(cwd, "/Assets/GameObjects/forest/"+id+".json"), json);
+        string manifestPath = Path.Combine(cwd, "Assets/GameObjects/manifest.txt");
+        int[] loc = sp.treeController.location;
+        string line = loc[0] + "-" + loc[1] + "-" + loc[2]+"\n";
+        if (File.Exists(manifestPath))
+        {
+            Debug.Log("Manifest Exists");
+            File.AppendAllText(manifestPath, line);
+        }
+        else
+        {
+            Debug.Log("Manifest does not exist");
+            File.WriteAllText(manifestPath, line);
+        }
+        string jsonSp = JsonUtility.ToJson(sp, true);
+        string jsonT = JsonUtility.ToJson(sp.treeController, true);
+        File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/sp_"+loc[0]+loc[1]+loc[2]+".json"), jsonSp);
+        File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/t_"+loc[0]+loc[1]+loc[2]+".json"), jsonT);
     }
 
 }

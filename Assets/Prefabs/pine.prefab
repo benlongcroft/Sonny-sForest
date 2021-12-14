@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3896433035887298775}
   - component: {fileID: 8464011750834671841}
   - component: {fileID: 6046568715973004055}
-  - component: {fileID: 8806329014253301905}
   - component: {fileID: 8938337460875902372}
   m_Layer: 7
   m_Name: pine
@@ -105,16 +104,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52a99e8b847460c8fb8ca6f37944798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTree:
-    location: 000000000000000000000000
-    stage: seed
-    hardiness: 55
-    pollutionThreshold: 87
-    lifespan: 30
-    seedGrowthTime: 2
-    diseaseResistance: 23
-    name: pine
-    active: 0
+  location: 000000000000000000000000
+  stage: 
+  hardiness: 0
+  pollutionThreshold: 0
+  lifespan: 0
+  seedGrowthTime: 0
+  diseaseResistance: 0
+  treeType: 
+  active: 0
   seedSprite: {fileID: 1664734526311863783, guid: 06a478d33e52c4fa0b02777a86683580, type: 3}
   seedlingSprite: {fileID: 21300000, guid: 432494848cd5fa4488c8f90069b0982e, type: 3}
   saplingSprite: {fileID: 21300000, guid: 6199e367306afba4fb2b434ada112692, type: 3}
@@ -185,34 +183,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34017944, y: 0.34670448}
   m_EdgeRadius: 0
---- !u!114 &8806329014253301905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518718773026918239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d52a99e8b847460c8fb8ca6f37944798, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myTree:
-    location: 000000000000000000000000
-    stage: 
-    hardiness: 0
-    pollutionThreshold: 0
-    lifespan: 0
-    seedGrowthTime: 0
-    diseaseResistance: 0
-    name: 
-    active: 0
-  seedSprite: {fileID: 0}
-  seedlingSprite: {fileID: 0}
-  saplingSprite: {fileID: 0}
-  treeSprite: {fileID: 0}
-  ancientSprite: {fileID: 0}
-  deadSprite: {fileID: 0}
 --- !u!50 &8938337460875902372
 Rigidbody2D:
   serializedVersion: 4

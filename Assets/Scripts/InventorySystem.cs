@@ -7,10 +7,16 @@ public class InventorySystem : MonoBehaviour
     private Dictionary<InventoryItemData, InventoryItem> _itemDictionary;
     public List<InventoryItem> inventory { get; private set; }
 
+    public InventoryItemData startSeed;
+
     private void Awake()
     {
         inventory = new List<InventoryItem>();
         _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        for (int x = 0; x < 3; x++)
+        {
+            this.Add(startSeed);
+        }
     }
 
     public void Add(InventoryItemData referenceData)

@@ -13,6 +13,7 @@ public class treeController : MonoBehaviour
     public int diseaseResistance; //% (usually low)
     public string treeType;
     public bool active = false;
+    public float efficiency;
 
     public Sprite seedSprite;
 
@@ -28,6 +29,7 @@ public class treeController : MonoBehaviour
 
     public Sprite setSprite()
     {
+        Debug.Log("Sprite set is "+this.stage);
         switch (stage)
         {
             case "seed":

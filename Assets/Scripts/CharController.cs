@@ -3,16 +3,28 @@ using UnityEngine;
 
 public class CharController : MonoBehaviour
 {
+    public InventorySystem myInventory;
+    private int inventorySelected = 0;
     private GameObject _loadout;
     Rigidbody2D rigidbody2d;
     public Field[] myForest = {};
 
+    private void setInventory()
+    {
+        LoadOut.instance.SetSprite(myInventory.inventory[inventorySelected].data.GetSpriteIcon());
+        LoadOut.instance.setCount(myInventory.inventory[inventorySelected].stackSize);
+        _loadout = myInventory.inventory[inventorySelected].data.prefab;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
         string cwd = System.IO.Directory.GetCurrentDirectory();
         myForest = gsoController.ReadForest(cwd, myForest);
         rigidbody2d = GetComponent<Rigidbody2D>();
+        // Sprite toSet = myInventory.inventory[inventorySelected].data.GetSpriteIcon();
+        // LoadOut.instance.SetSprite(toSet);
+        setInventory();
     }
 
     // Update is called once per frame
@@ -25,18 +37,18 @@ public class CharController : MonoBehaviour
         position.y = position.y + 0.4f * vertical * Time.deltaTime;
         transform.position = position;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f,
-                LayerMask.GetMask("seeds"));
-            if (hit.collider != null)
+            if (inventorySelected+1 == myInventory.inventory.Count)
             {
-                GameObject objHit = hit.collider.gameObject;
-                _loadout = objHit;
-                LoadOut.instance.SetSprite(_loadout.GetComponent<SpriteRenderer>().sprite);
-                objHit.SetActive(false); // Destroy doesnt work so have to use this but need to garbage collect
+                inventorySelected += 1;
+            }
+            else
+            {
+                inventorySelected = 0;
             }
             
+            setInventory();
         }
     
         if(Input.GetKeyDown(KeyCode.P))
@@ -45,7 +57,7 @@ public class CharController : MonoBehaviour
             if (hit.collider != null)
             {
                 Debug.Log("Collision!");
-                Plot objHit = hit.collider.gameObject.GetComponent<Plot>();
+                var objHit = hit.collider.gameObject.GetComponent<Plot>();
                 Debug.Log(_loadout);
                 if (_loadout != null)
                 {
@@ -59,8 +71,8 @@ public class CharController : MonoBehaviour
                         }
                         else
                         {
-                            _loadout = null;
-                            LoadOut.instance.SetSprite(null);
+                            myInventory.inventory[inventorySelected].RemoveFromStack();
+                            setInventory();
                         }
                     }
                     else

@@ -6,6 +6,8 @@ public class LoadOut : MonoBehaviour
     public static LoadOut instance { get; private set; }
 
     private Image img = null;
+
+    public Text count;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,5 +23,10 @@ public class LoadOut : MonoBehaviour
     public void SetSprite(Sprite newSprite)
     {
         img.sprite = newSprite;
+    }
+
+    public void setCount(int count)
+    {
+        this.count.text = count.ToString();
     }
 }

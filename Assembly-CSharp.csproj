@@ -56,14 +56,14 @@
      <Compile Include="Assets\Scripts\CharController.cs" />
      <Compile Include="Assets\Scripts\subPlotController.cs" />
      <Compile Include="Assets\Scripts\Field.cs" />
+     <Compile Include="Assets\Scripts\InventoryItemData.cs" />
      <Compile Include="Assets\Scripts\PollutionBar.cs" />
+     <Compile Include="Assets\Scripts\InventoryItem.cs" />
      <Compile Include="Assets\Scripts\OpenShop.cs" />
+     <Compile Include="Assets\Scripts\InventorySystem.cs" />
      <Compile Include="Assets\Scripts\gsoController.cs" />
      <Compile Include="Assets\Scripts\LoadOut.cs" />
      <Compile Include="Assets\Scripts\treeController.cs" />
-     <Compile Include="Assets\Scripts\InventorySystem.cs" />
-     <Compile Include="Assets\Scripts\InventoryItemData.cs" />
-     <Compile Include="Assets\Scripts\InventoryItem.cs" />
      <None Include="Assets\GameObjects\manifest.txt" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.24f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

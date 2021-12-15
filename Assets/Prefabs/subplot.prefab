@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7898443963924902668}
   - component: {fileID: 1469455736854401138}
-  - component: {fileID: -4291761809249034496}
+  - component: {fileID: 2310657975851522543}
   m_Layer: 6
   m_Name: subplot
   m_TagString: Untagged
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &-4291761809249034496
+--- !u!114 &2310657975851522543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,7 +175,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3078285968330516914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e962c60a07e84c78aa424a25d1ee97e, type: 3}
+  m_Script: {fileID: 11500000, guid: fa751384f03c4fcdb8357f71b60d21e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fieldID: 0
+  plots: []
+  trees: []
+  subPlots: []
+  plotID: 0
+  subPlotID: 0
+  seeded: 0
+  timer: 0
+  treeController: {fileID: 0}
   child: {fileID: 752969224982027977}

@@ -10,16 +10,16 @@ public class subPlotController : Plot
     public treeController treeController;
     public GameObject child;
     private SpriteRenderer spriteRenderer;
-    private int currentState = 0;
+    public int currentState = 0;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = child.gameObject.GetComponent<SpriteRenderer>();
-        if (treeController != null)
-        {
-            spriteRenderer.sprite = treeController.setSprite();
-            Debug.Log("Set new Sprite! "+treeController.stage);
-        }
+        // if (treeController != null)
+        // {
+        //     spriteRenderer.sprite = treeController.setSprite();
+        //     Debug.Log("Set new Sprite! "+treeController.stage);
+        // }
         
     }
 
@@ -31,10 +31,14 @@ public class subPlotController : Plot
         {
             spriteRenderer.sprite = treeController.setSprite();
             timer = timer + Time.deltaTime;
-            if (timer > 25)
+            if (timer > 5)
             {
                 switch (currentState)
                 {
+                    default:
+                        spriteRenderer.sprite = treeController.seedSprite;
+                        treeController.stage = "seed";
+                        break;
                     case 0:
                         spriteRenderer.sprite = treeController.seedlingSprite;
                         treeController.stage = "seedling";

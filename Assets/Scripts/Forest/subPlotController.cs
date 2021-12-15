@@ -15,12 +15,6 @@ public class subPlotController : Plot
     void Start()
     {
         spriteRenderer = child.gameObject.GetComponent<SpriteRenderer>();
-        // if (treeController != null)
-        // {
-        //     spriteRenderer.sprite = treeController.setSprite();
-        //     Debug.Log("Set new Sprite! "+treeController.stage);
-        // }
-        
     }
 
 
@@ -35,10 +29,10 @@ public class subPlotController : Plot
             {
                 switch (currentState)
                 {
-                    default:
-                        spriteRenderer.sprite = treeController.seedSprite;
-                        treeController.stage = "seed";
-                        break;
+                    // default:
+                    //     spriteRenderer.sprite = treeController.seedSprite;
+                    //     treeController.stage = "seed";
+                    //     break;
                     case 0:
                         spriteRenderer.sprite = treeController.seedlingSprite;
                         treeController.stage = "seedling";
@@ -58,6 +52,7 @@ public class subPlotController : Plot
                     case 4:
                         spriteRenderer.sprite = treeController.deadSprite;
                         treeController.stage = "dead";
+                        seeded = false;
                         break;
                 }
                 gsoController.UpdateTree(System.IO.Directory.GetCurrentDirectory(), this);
@@ -71,9 +66,6 @@ public class subPlotController : Plot
     {
         treeController = t;
         seeded = true;
-        t.location = new[] {subPlotID, plotID, fieldID};
-        t.stage = "seed";
-        gsoController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), this);
         Debug.Log("Tree Planted");
     }
 }

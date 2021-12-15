@@ -15,14 +15,16 @@ public class Plot : Field
         {
             if (trees[i] != null && subPlots[i].seeded == false)
             {
+                trees[i].location = new[] {fieldID, plotID, subPlots[i].subPlotID};
+                trees[i].stage = "seed";
                 subPlots[i].SetTree(trees[i]);
+                gsoController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
             }
         }
     }
     
     public int choosePlot(treeController treeControllerObj)
     {
-        Debug.Log(treeControllerObj.ToString());
         for(int i =0; i < 4; i=i+1)
         {
             if (trees[i] == null)

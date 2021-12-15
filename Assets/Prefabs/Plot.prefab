@@ -298,6 +298,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1275237805
       objectReference: {fileID: 0}
+    - target: {fileID: 2310657975851522543, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
+      propertyPath: subPlotID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3078285968330516914, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_Name
       value: sp2
@@ -535,6 +539,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1275237805
       objectReference: {fileID: 0}
+    - target: {fileID: 2310657975851522543, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
+      propertyPath: subPlotID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3078285968330516914, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_Name
       value: sp3
@@ -623,6 +631,10 @@ PrefabInstance:
     - target: {fileID: 1469455736854401138, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_SortingLayerID
       value: 1275237805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310657975851522543, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
+      propertyPath: subPlotID
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3078285968330516914, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_Name
@@ -860,6 +872,10 @@ PrefabInstance:
     - target: {fileID: 1469455736854401138, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_SortingLayerID
       value: 1275237805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310657975851522543, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
+      propertyPath: subPlotID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3078285968330516914, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_Name

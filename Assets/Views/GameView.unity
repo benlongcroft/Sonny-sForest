@@ -755,6 +755,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Field
       objectReference: {fileID: 0}
+    - target: {fileID: 5749385053930684587, guid: 9475d95be0a8c462eb164fbf133c84e0, type: 3}
+      propertyPath: plotID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919978936464931814, guid: 9475d95be0a8c462eb164fbf133c84e0, type: 3}
+      propertyPath: plotID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919978936607008086, guid: 9475d95be0a8c462eb164fbf133c84e0, type: 3}
+      propertyPath: plotID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919978937104394411, guid: 9475d95be0a8c462eb164fbf133c84e0, type: 3}
+      propertyPath: plotID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919978937563772318, guid: 9475d95be0a8c462eb164fbf133c84e0, type: 3}
+      propertyPath: plotID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919978938166597978, guid: 9475d95be0a8c462eb164fbf133c84e0, type: 3}
+      propertyPath: plotID
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9475d95be0a8c462eb164fbf133c84e0, type: 3}
 --- !u!1001 &2368866073573804665
@@ -926,7 +950,8 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 1908c45859d4044cc95a4a8dee62d532, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6816495835479182369, guid: 79056d19c8df64a438f169f84cf31841, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 79056d19c8df64a438f169f84cf31841, type: 3}
 --- !u!1001 &7775492015507433795
 PrefabInstance:

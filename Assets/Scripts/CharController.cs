@@ -56,15 +56,14 @@ public class CharController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
             if (hit.collider != null)
             {
-                Debug.Log("Collision!");
                 var objHit = hit.collider.gameObject.GetComponent<Plot>();
-                Debug.Log(_loadout);
                 if (_loadout != null)
                 {
                     treeController isSeed = _loadout.GetComponent<treeController>();
                     if (isSeed != null)
                     {
                         int success = objHit.choosePlot(isSeed);
+                        Debug.Log("PLOTID: "+objHit.plotID);
                         if (success == -1)
                         {
                             Debug.Log("Plot is FULL!");

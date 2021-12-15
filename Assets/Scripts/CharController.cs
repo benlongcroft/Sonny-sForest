@@ -1,83 +1,82 @@
+using Forest;
+using Inventory;
 using UnityEngine;
 
-
-public class CharController : MonoBehaviour
+namespace Main
 {
-    public InventorySystem myInventory;
-    private int inventorySelected = 0;
-    private GameObject _loadout;
-    Rigidbody2D rigidbody2d;
-    public Field[] myForest = {};
-
-    private void setInventory()
+    public class CharController : MonoBehaviour
     {
-        LoadOut.instance.SetSprite(myInventory.inventory[inventorySelected].data.GetSpriteIcon());
-        LoadOut.instance.setCount(myInventory.inventory[inventorySelected].stackSize);
-        _loadout = myInventory.inventory[inventorySelected].data.prefab;
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        string cwd = System.IO.Directory.GetCurrentDirectory();
-        myForest = gsoController.ReadForest(cwd, myForest);
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        // Sprite toSet = myInventory.inventory[inventorySelected].data.GetSpriteIcon();
-        // LoadOut.instance.SetSprite(toSet);
-        setInventory();
-    }
+        public InventorySystem myInventory;
+        private int _inventorySelected = 0;
+        private GameObject _loadout;
+        private Rigidbody2D _rigidbody2d;
+        public Field[] myForest = {};
 
-    // Update is called once per frame
-    void Update()
-    { 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector2 position = transform.position;
-        position.x = position.x + 0.4f * horizontal * Time.deltaTime;
-        position.y = position.y + 0.4f * vertical * Time.deltaTime;
-        transform.position = position;
-
-        if (Input.GetKeyDown(KeyCode.Tab))
+        private void SetInventory()
         {
-            if (inventorySelected+1 == myInventory.inventory.Count)
-            {
-                inventorySelected += 1;
-            }
-            else
-            {
-                inventorySelected = 0;
-            }
-            
-            setInventory();
+            LoadOut.Instance.SetSprite(myInventory.Inventory[_inventorySelected].Data.GetSpriteIcon());
+            LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize);
+            _loadout = myInventory.Inventory[_inventorySelected].Data.prefab;
         }
     
-        if(Input.GetKeyDown(KeyCode.P))
+        // Start is called before the first frame update
+        void Start()
         {
-            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
-            if (hit.collider != null)
+            var cwd = System.IO.Directory.GetCurrentDirectory();
+            myForest = GSOController.ReadForest(cwd, myForest);
+            _rigidbody2d = GetComponent<Rigidbody2D>();
+            SetInventory();
+        }
+
+        // Update is called once per frame
+        void Update()
+        { 
+            var horizontal = Input.GetAxis("Horizontal");
+            var vertical = Input.GetAxis("Vertical");
+            var transform1 = transform;
+            Vector2 position = transform1.position;
+            position.x += 0.4f * horizontal * Time.deltaTime;
+            position.y += 0.4f * vertical * Time.deltaTime;
+            transform1.position = position;
+
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                var objHit = hit.collider.gameObject.GetComponent<Plot>();
-                if (_loadout != null)
+                if (_inventorySelected+1 == myInventory.Inventory.Count)
                 {
-                    treeController isSeed = _loadout.GetComponent<treeController>();
-                    if (isSeed != null)
+                    _inventorySelected += 1;
+                }
+                else
+                {
+                    _inventorySelected = 0;
+                }
+            
+                SetInventory();
+            }
+    
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                var hit = Physics2D.Raycast(_rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
+                if (hit.collider == null) return;
+                var objHit = hit.collider.gameObject.GetComponent<Plot>();
+                if (_loadout == null) return;
+                var isSeed = _loadout.GetComponent<TreeController>();
+                if (isSeed != null)
+                {
+                    var success = objHit.ChoosePlot(isSeed);
+                    Debug.Log("PLOTID: "+objHit.plotID);
+                    if (success == -1)
                     {
-                        int success = objHit.choosePlot(isSeed);
-                        Debug.Log("PLOTID: "+objHit.plotID);
-                        if (success == -1)
-                        {
-                            Debug.Log("Plot is FULL!");
-                        }
-                        else
-                        {
-                            myInventory.inventory[inventorySelected].RemoveFromStack();
-                            setInventory();
-                        }
+                        Debug.Log("Plot is FULL!");
                     }
                     else
                     {
-                        Debug.Log("No Seed Equipped");
+                        myInventory.Inventory[_inventorySelected].RemoveFromStack();
+                        SetInventory();
                     }
+                }
+                else
+                {
+                    Debug.Log("No Seed Equipped");
                 }
             }
         }

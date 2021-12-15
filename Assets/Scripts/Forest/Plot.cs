@@ -1,40 +1,50 @@
 using System.Collections.Generic;
-using UnityEngine;
+using Main;
 
-public class Plot : Field
+namespace Forest
 {
-    public List<treeController> trees = new List<treeController>{};
+    public class Plot : Field
+    {
+        public List<TreeController> trees = new List<TreeController>{};
     
-    public List<subPlotController> subPlots = new List<subPlotController> {};
+        public List<SubPlotController> subPlots = new List<SubPlotController> {};
     
-    public int plotID;
+        public int plotID;
 
-    void Update()
-    {
-        for (int i = 0; i < 4; i = i + 1)
-        {
-            if (trees[i] != null && subPlots[i].seeded == false)
-            {
-                trees[i].location = new[] {fieldID, plotID, subPlots[i].subPlotID};
-                trees[i].stage = "seed";
-                subPlots[i].SetTree(trees[i]);
-                gsoController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
-            }
-        }
-    }
+        // void Update()
+        // {
+        //     for (var i = 0; i < 4; i += 1)
+        //     {
+        //         if (trees[i].stage != null && subPlots[i].seeded == false)
+        //         {
+        //             trees[i].location = new[] {fieldID, plotID, subPlots[i].subPlotID};
+        //             trees[i].spriteRenderer = subPlots[i].treeController.spriteRenderer;
+        //             //swap around sprite renderer so that tree grows in subplot
+        //             subPlots[i].treeController = trees[i];
+        //             subPlots[i].treeController.active = true;
+        //         
+        //             GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);   
+        //         }
+        //     }
+        // }
     
-    public int choosePlot(treeController treeControllerObj)
-    {
-        for(int i =0; i < 4; i=i+1)
+        public int ChoosePlot(TreeController treeControllerObj)
         {
-            if (trees[i] == null)
+            for(var i =0; i < 4; i += 1)
             {
-                treeControllerObj.active = true;
-                trees[i] = treeControllerObj;
+                if (trees[i].stage == "")
+                {
+                    trees[i] = treeControllerObj;
+                    trees[i].location = new[] {fieldID, plotID, subPlots[i].subPlotID};
+                    trees[i].spriteRenderer = subPlots[i].treeController.spriteRenderer;
+                    //swap around sprite renderer so that tree grows in subplot
+                    subPlots[i].SetTree(trees[i]);
+                    GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);  
+                }
                 return i;
             }
-        }
 
-        return -1;
+            return -1;
+        }
     }
 }

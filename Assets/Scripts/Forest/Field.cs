@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public class Field : MonoBehaviour
+namespace Forest
 {
-    public int fieldID;
-    public Plot[] plots = { };
+    public class Field : MonoBehaviour
+    {
+        public int fieldID;
+        public Plot[] plots = { };
+    }
+
 }

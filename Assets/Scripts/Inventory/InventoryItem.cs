@@ -1,27 +1,27 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-[Serializable]
-public class InventoryItem
+namespace Inventory
 {
-    public InventoryItemData data { get; private set; }
-    public int stackSize { get; private set; }
-
-    public InventoryItem(InventoryItemData source)
+    [Serializable]
+    public class InventoryItem
     {
-        data = source;
-        AddToStack();
-    }
+        public InventoryItemData Data { get; private set; }
+        public int StackSize { get; private set; }
 
-    public void AddToStack()
-    {
-        stackSize++;
-    }
+        public InventoryItem(InventoryItemData source)
+        {
+            Data = source;
+            AddToStack();
+        }
 
-    public void RemoveFromStack()
-    {
-        stackSize--;
+        public void AddToStack()
+        {
+            StackSize++;
+        }
+
+        public void RemoveFromStack()
+        {
+            StackSize--;
+        }
     }
 }

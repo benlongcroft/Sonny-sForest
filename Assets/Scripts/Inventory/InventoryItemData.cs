@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory Item Data")]
-public class InventoryItemData : ScriptableObject
+namespace Inventory
 {
-    public string id;
-    public string displayName;
-    public GameObject prefab;
-
-    public Sprite GetSpriteIcon()
+    [CreateAssetMenu(menuName = "Inventory Item Data")]
+    public class InventoryItemData : ScriptableObject
     {
-        return prefab.GetComponent<SpriteRenderer>().sprite;
+        public string id;
+        public string displayName;
+        public GameObject prefab;
+
+        public Sprite GetSpriteIcon()
+        {
+            return prefab.GetComponent<SpriteRenderer>().sprite;
+        }
     }
 }

@@ -1,32 +1,42 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadOut : MonoBehaviour
+namespace Main
 {
-    public static LoadOut instance { get; private set; }
-
-    private Image img = null;
-
-    public Text count;
-    // Start is called before the first frame update
-    void Awake()
+    public class LoadOut : MonoBehaviour
     {
-        instance = this;
-    }
+        public static LoadOut Instance { get; private set; }
 
-    void Start()
-    {
-        img = instance.GetComponent<Image>();
-    }
+        private Image _img = null;
 
-    // Update is called once per frame
-    public void SetSprite(Sprite newSprite)
-    {
-        img.sprite = newSprite;
-    }
+        public Text quantityLabel;
 
-    public void setCount(int count)
-    {
-        this.count.text = count.ToString();
+        public Text itemLabel;
+        // Start is called before the first frame update
+        void Awake()
+        {
+            Instance = this;
+        }
+
+        void Start()
+        {
+            _img = Instance.GetComponent<Image>();
+        }
+
+        // Update is called once per frame
+        public void SetSprite(Sprite newSprite)
+        {
+            _img.sprite = newSprite;
+        }
+
+        public void SetQuantity(int quantity)
+        {
+            quantityLabel.text = quantity.ToString();
+        }
+
+        public void SetItemName(string name)
+        {
+            itemLabel.text = name;
+        }
     }
 }

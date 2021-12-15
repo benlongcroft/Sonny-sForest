@@ -1,46 +1,46 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventorySystem : MonoBehaviour
+namespace Inventory
 {
-    private Dictionary<InventoryItemData, InventoryItem> _itemDictionary;
-    public List<InventoryItem> inventory { get; private set; }
-
-    public InventoryItemData startSeed;
-
-    private void Awake()
+    public class InventorySystem : MonoBehaviour
     {
-        inventory = new List<InventoryItem>();
-        _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
-        for (int x = 0; x < 3; x++)
-        {
-            this.Add(startSeed);
-        }
-    }
+        private Dictionary<InventoryItemData, InventoryItem> _itemDictionary;
+        public List<InventoryItem> Inventory { get; private set; }
 
-    public void Add(InventoryItemData referenceData)
-    {
-        if (_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
-        {
-            value.AddToStack();
-        }
-        else
-        {
-            InventoryItem newItem = new InventoryItem(referenceData);
-            inventory.Add(newItem);
-            _itemDictionary.Add(referenceData, newItem);
-        }
-    }
+        public InventoryItemData startSeed;
 
-    public void Remove(InventoryItemData referenceData)
-    {
-        if (_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        private void Awake()
         {
-            value.RemoveFromStack();
-            if (value.stackSize == 0)
+            Inventory = new List<InventoryItem>();
+            _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+            for (var x = 0; x < 3; x++)
             {
-                inventory.Remove(value);
+                this.Add(startSeed);
+            }
+        }
+
+        public void Add(InventoryItemData referenceData)
+        {
+            if (_itemDictionary.TryGetValue(referenceData, out var value))
+            {
+                value.AddToStack();
+            }
+            else
+            {
+                var newItem = new InventoryItem(referenceData);
+                Inventory.Add(newItem);
+                _itemDictionary.Add(referenceData, newItem);
+            }
+        }
+
+        public void Remove(InventoryItemData referenceData)
+        {
+            if (!_itemDictionary.TryGetValue(referenceData, out var value)) return;
+            value.RemoveFromStack();
+            if (value.StackSize == 0)
+            {
+                Inventory.Remove(value);
                 _itemDictionary.Remove(referenceData);
             }
         }

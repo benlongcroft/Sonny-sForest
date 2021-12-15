@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace controllers
+namespace Main
 {
     public class OpenShop : MonoBehaviour
     {

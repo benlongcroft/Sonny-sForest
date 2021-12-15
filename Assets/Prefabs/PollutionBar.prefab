@@ -198,9 +198,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6816495835479182373}
-  - component: {fileID: 6816495835479182369}
   - component: {fileID: 6816495835479182371}
   - component: {fileID: 6816495835479182370}
+  - component: {fileID: 7907020598477380467}
   - component: {fileID: 6816495835479182368}
   m_Layer: 5
   m_Name: Pollution
@@ -229,19 +229,6 @@ RectTransform:
   m_AnchoredPosition: {x: 139.09, y: -18}
   m_SizeDelta: {x: 263.49, y: 22.032}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6816495835479182369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6816495835479182372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 399b9b92811d44780a28d65d7deb3890, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mask: {fileID: 6816495835252854551}
 --- !u!222 &6816495835479182371
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -280,6 +267,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7907020598477380467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6816495835479182372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89723e3e5311471f9df84d83eccafe8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask: {fileID: 6816495835252854551}
 --- !u!114 &6816495835479182368
 MonoBehaviour:
   m_ObjectHideFlags: 0

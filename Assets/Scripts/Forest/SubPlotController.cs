@@ -22,6 +22,7 @@ namespace Forest
             var stageMultipliers = new Dictionary<string, int>(){ {"seed",1}, {"seedling", 1}, {"sapling",2}, {"tree", 3}, {"ancient", 5}};
             float k = (treeController.lifespan / 12);
             return stageMultipliers[treeController.stage] * k;
+            //key error here?
         }
 
 
@@ -39,7 +40,6 @@ namespace Forest
                     if (treeController.stage == "dead")
                     {
                         seeded = false;
-                        return;
                     }
                     GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
                     if (treeController.stage == _stages[currentStage])

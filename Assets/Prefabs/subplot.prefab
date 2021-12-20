@@ -216,4 +216,5 @@ MonoBehaviour:
   subPlotID: 0
   seeded: 0
   timer: 0
+  currentStage: 0
   treeController: {fileID: 2191349878102588417}

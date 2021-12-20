@@ -64,7 +64,6 @@
      <Compile Include="Assets\Scripts\GSOController.cs" />
      <Compile Include="Assets\Scripts\LoadOut.cs" />
      <Compile Include="Assets\Scripts\Forest\TreeController.cs" />
-     <None Include="Assets\GameObjects\manifest.txt" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.24f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

@@ -7,7 +7,7 @@ using Unity.Mathematics;
 namespace Forest
 {
     [Serializable]
-    public class SubPlotController : Plot
+    public class SubPlotController : MonoBehaviour
     {
         public int subPlotID;
         public bool seeded = false;
@@ -36,9 +36,13 @@ namespace Forest
                 if (timer - _lastTimer >= g)
                 {
                     treeController.SetSprite();
-                    treeController.stage = _stages[currentStage];
-                    currentStage += 1;
+                    if (treeController.stage == "dead")
+                    {
+                        seeded = false;
+                    }
                     GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
+                    currentStage += 1;
+                    treeController.stage = _stages[currentStage];
                     _lastTimer = timer;
                 }   
             }

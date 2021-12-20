@@ -21,6 +21,14 @@ namespace Main
             return ids;
         }
 
+        private static void WriteToJson(SubPlotController sp, int[] loc, string cwd)
+        {
+            var jsonSp = JsonUtility.ToJson(sp, true);
+            var jsonT = JsonUtility.ToJson(sp.treeController, true);
+            File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/sp_"+loc[0]+loc[1]+loc[2]+".json"), jsonSp);
+            File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/t_"+loc[0]+loc[1]+loc[2]+".json"), jsonT);
+        }
+
         public static void UpdateTree(string cwd, SubPlotController spToUpdate)
         {
             var manifestPath = Path.Combine(cwd, "Assets/GameObjects/manifest.txt");
@@ -30,10 +38,7 @@ namespace Main
             foreach (var id in ids)
             {
                 if (!id.SequenceEqual(loc)) continue;
-                var jsonSp = JsonUtility.ToJson(spToUpdate, true);
-                var jsonT = JsonUtility.ToJson(spToUpdate.treeController, true);
-                File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/sp_"+loc[0]+loc[1]+loc[2]+".json"), jsonSp);
-                File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/t_"+loc[0]+loc[1]+loc[2]+".json"), jsonT);
+                WriteToJson(spToUpdate, loc, cwd);
             }
         }
         public static Field[] ReadForest(string cwd, Field[] myForest)
@@ -63,18 +68,18 @@ namespace Main
             var line = loc[0] + "-" + loc[1] + "-" + loc[2]+"\n";
             if (File.Exists(manifestPath))
             {
-                Debug.Log("Manifest Exists");
-                File.AppendAllText(manifestPath, line);
+                var ids = GETIDs(manifestPath);
+                if (!ids.Contains(loc))
+                {
+                    File.AppendAllText(manifestPath, line);
+                }
             }
             else
             {
                 Debug.Log("Manifest does not exist");
                 File.WriteAllText(manifestPath, line);
             }
-            var jsonSp = JsonUtility.ToJson(sp, true);
-            var jsonT = JsonUtility.ToJson(sp.treeController, true);
-            File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/sp_"+loc[0]+loc[1]+loc[2]+".json"), jsonSp);
-            File.WriteAllText(Path.Combine(cwd, "Assets/GameObjects/forest/t_"+loc[0]+loc[1]+loc[2]+".json"), jsonT);
+            WriteToJson(sp, loc, cwd);
         }
 
     }

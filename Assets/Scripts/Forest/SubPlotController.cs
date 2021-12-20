@@ -13,8 +13,8 @@ namespace Forest
         public bool seeded = false;
         public float timer = 0;
         private float _lastTimer = 0;
-        private string[] _stages = new[] {"seed", "seedling", "sapling", "tree", "ancient", "dead"};
         public int currentStage = 0;
+        private string[] _stages = {"seed", "seedling", "sapling", "tree", "ancient", "dead"};
         public TreeController treeController;
 
         private float GrowTime()
@@ -32,28 +32,41 @@ namespace Forest
             { 
                 timer = timer + Time.deltaTime;
                 float g = GrowTime();
-                Debug.Log((timer - _lastTimer)+"/"+g);
+                // Debug.Log((timer - _lastTimer)+"/"+g);
                 if (timer - _lastTimer >= g)
                 {
                     treeController.SetSprite();
                     if (treeController.stage == "dead")
                     {
                         seeded = false;
+                        return;
                     }
                     GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
-                    currentStage += 1;
-                    treeController.stage = _stages[currentStage];
+                    if (treeController.stage == _stages[currentStage])
+                    {
+                        treeController.stage = _stages[currentStage + 1];
+                        currentStage += 1;
+                    }
+                    else
+                    {
+                        Debug.Log("NOT MATCHING: "+treeController.stage+"--"+_stages[currentStage]);
+                    }
                     _lastTimer = timer;
                 }   
             }
 
         }
 
-        public void SetTree(TreeController t)
+        public void SetTree(TreeController t, int[] loc)
         {
+            t.spriteRenderer = treeController.spriteRenderer;
+            //swap around sprite renderer
+            
             treeController = t;
-            seeded = true;
+            treeController.location = loc;
+            treeController.stage = "seed";
             treeController.active = true;
+            seeded = true;
         }
     }
 }

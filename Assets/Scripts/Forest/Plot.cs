@@ -5,8 +5,7 @@ namespace Forest
 {
     public class Plot : Field
     {
-        public List<TreeController> trees = new List<TreeController>{};
-    
+
         public List<SubPlotController> subPlots = new List<SubPlotController> {};
     
         public int plotID;
@@ -32,14 +31,9 @@ namespace Forest
         {
             for(var i =0; i < 4; i += 1)
             {
-                if (trees[i].stage == "" && subPlots[i].seeded == false)
+                if (subPlots[i].seeded == false)
                 {
-                    trees[i] = treeControllerObj;
-                    trees[i].location = new[] {fieldID, plotID, subPlots[i].subPlotID};
-                    trees[i].spriteRenderer = subPlots[i].treeController.spriteRenderer;
-                    trees[i].stage = "seed";
-                    //swap around sprite renderer so that tree grows in subplot
-                    subPlots[i].SetTree(trees[i]);
+                    subPlots[i].SetTree(treeControllerObj, new[] {fieldID, plotID, subPlots[i].subPlotID});
                     GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
                     return i;
                 }

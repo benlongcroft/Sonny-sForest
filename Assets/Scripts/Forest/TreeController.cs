@@ -32,18 +32,33 @@ namespace Forest
 
         public Sprite deadSprite;
 
-        public Sprite SetSprite()
+        public void SetSprite()
         {
             Debug.Log("Sprite set is "+this.stage);
-            return stage switch
+            switch (stage)
             {
-                "seed" => spriteRenderer.sprite = seedSprite,
-                "seedling" => spriteRenderer.sprite = seedlingSprite,
-                "sapling" => spriteRenderer.sprite = saplingSprite,
-                "tree" => spriteRenderer.sprite = treeSprite,
-                "ancient" => spriteRenderer.sprite = ancientSprite,
-                "dead" => spriteRenderer.sprite = deadSprite,
-            };
+                case "seed":
+                    spriteRenderer.sprite = seedSprite;
+                    break;
+                case "seedling":
+                    spriteRenderer.sprite = seedlingSprite;
+                    break;
+                case "sapling":
+                    spriteRenderer.sprite = saplingSprite;
+                    break;
+                case "tree":
+                    spriteRenderer.sprite = treeSprite;
+                    break;
+                case "ancient":
+                    spriteRenderer.sprite = ancientSprite;
+                    break;
+                case "dead":
+                    spriteRenderer.sprite = deadSprite;
+                    active = false;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(stage));
+            }
         }
     }
 }

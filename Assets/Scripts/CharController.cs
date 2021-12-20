@@ -16,7 +16,8 @@ namespace Main
         {
             LoadOut.Instance.SetSprite(myInventory.Inventory[_inventorySelected].Data.GetSpriteIcon());
             LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize);
-            _loadout = myInventory.Inventory[_inventorySelected].Data.prefab;
+            _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
+            _loadout.SetActive(false);
         }
     
         // Start is called before the first frame update

@@ -39,6 +39,8 @@ namespace Main
             position.x += 0.4f * horizontal * Time.deltaTime;
             position.y += 0.4f * vertical * Time.deltaTime;
             transform1.position = position;
+            
+            //implement check if seeds have been dropped
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {

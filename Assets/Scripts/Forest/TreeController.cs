@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Main;
 
 namespace Forest
 {
@@ -18,7 +17,7 @@ namespace Forest
         public bool active = false;
         public float efficiency;
 
-        public SpriteRenderer spriteRenderer;
+        public GameObject seedPrefab;
         
         public Sprite seedSprite;
 
@@ -32,30 +31,24 @@ namespace Forest
 
         public Sprite deadSprite;
 
-        public void SetSprite()
+        public Sprite SetSprite()
         {
             Debug.Log("Sprite set is "+this.stage);
             switch (stage)
             {
                 case "seed":
-                    spriteRenderer.sprite = seedSprite;
-                    break;
+                    return seedSprite;
                 case "seedling":
-                    spriteRenderer.sprite = seedlingSprite;
-                    break;
+                    return seedlingSprite;
                 case "sapling":
-                    spriteRenderer.sprite = saplingSprite;
-                    break;
+                    return saplingSprite;
                 case "tree":
-                    spriteRenderer.sprite = treeSprite;
-                    break;
+                    return treeSprite;
                 case "ancient":
-                    spriteRenderer.sprite = ancientSprite;
-                    break;
+                    return ancientSprite;
                 case "dead":
-                    spriteRenderer.sprite = deadSprite;
                     active = false;
-                    break;
+                    return deadSprite;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stage));
             }

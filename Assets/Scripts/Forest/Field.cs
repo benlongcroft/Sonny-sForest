@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Forest
@@ -6,6 +7,7 @@ namespace Forest
     {
         public int fieldID;
         public Plot[] plots = { };
+        // public List<TreeController> droppedSeeds = new List<TreeController>();
     }
 
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Inventory;
 using UnityEngine;
 using Main;
 using Unity.Mathematics;
@@ -16,6 +17,8 @@ namespace Forest
         public bool dead = false;
         public int currentStage = 0;
         private string[] _stages = {"seed", "seedling", "sapling", "tree", "ancient", "dead"};
+        // public TreeController treeController;
+        public SpriteRenderer treeSpriteRenderer;
         public TreeController treeController;
 
         private float GrowTime()
@@ -37,12 +40,21 @@ namespace Forest
                 Debug.Log((timer - _lastTimer)+"/"+g);
                 if (timer - _lastTimer >= g)
                 {
-                    treeController.SetSprite();
+                    treeSpriteRenderer.sprite = treeController.SetSprite();
                     if (treeController.stage == "dead")
                     {
                         dead = true;
                         return;
+                    } 
+                    
+                    if (treeController.stage == "tree" || treeController.stage == "ancient")
+                    {
+                        GameObject newSeed = Instantiate(treeController.seedPrefab);
+                        newSeed.name = "seedDropped";
+                        newSeed.layer = 0;
+                        newSeed.SetActive(true);
                     }
+                    
                     GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
                     
                     if (treeController.stage == _stages[currentStage])
@@ -62,10 +74,8 @@ namespace Forest
 
         public void SetTree(TreeController t, int[] loc)
         {
-            t.spriteRenderer = treeController.spriteRenderer;
-            //swap around sprite renderer
-            
-            treeController = t;
+            treeController = Instantiate(t);
+            treeController.seedPrefab = t.gameObject;
             treeController.location = loc;
             treeController.stage = "seed";
             treeController.active = true;

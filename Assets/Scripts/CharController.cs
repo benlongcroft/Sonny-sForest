@@ -17,6 +17,7 @@ namespace Main
             LoadOut.Instance.SetSprite(myInventory.Inventory[_inventorySelected].Data.GetSpriteIcon());
             LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize);
             _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
+            _loadout.name = "loadout";
             _loadout.SetActive(false);
         }
     
@@ -36,8 +37,8 @@ namespace Main
             var vertical = Input.GetAxis("Vertical");
             var transform1 = transform;
             Vector2 position = transform1.position;
-            position.x += 0.4f * horizontal * Time.deltaTime;
-            position.y += 0.4f * vertical * Time.deltaTime;
+            position.x += 1.2f * horizontal * Time.deltaTime;
+            position.y += 1.2f * vertical * Time.deltaTime;
             transform1.position = position;
             
             //implement check if seeds have been dropped

@@ -56,7 +56,7 @@ namespace Main
                 var jsonT = File.ReadAllText(Path.Combine(cwd, "Assets/GameObjects/forest/t_"+loc[0]+loc[1]+loc[2]+".json"));
                 JsonUtility.FromJsonOverwrite(jsonSp, myForest[loc[0]].plots[loc[1]].subPlots[loc[2]]);
                 JsonUtility.FromJsonOverwrite(jsonT, myForest[loc[0]].plots[loc[1]].subPlots[loc[2]].treeController);
-                myForest[loc[0]].plots[loc[1]].subPlots[loc[2]].treeController.SetSprite();
+                myForest[loc[0]].plots[loc[1]].subPlots[loc[2]].treeSpriteRenderer.sprite = myForest[loc[0]].plots[loc[1]].subPlots[loc[2]].treeController.SetSprite();
                 Debug.Log("GSO loaded "+myForest[loc[0]].plots[loc[1]].subPlots[loc[2]].treeController.stage);
             }
             return myForest;

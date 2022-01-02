@@ -7,7 +7,6 @@ namespace Forest
     {
         public int fieldID;
         public Plot[] plots = { };
-        // public List<TreeController> droppedSeeds = new List<TreeController>();
     }
 
 }

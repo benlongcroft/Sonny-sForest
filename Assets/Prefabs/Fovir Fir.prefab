@@ -105,11 +105,7 @@ MonoBehaviour:
   treeType: Fovir Fir
   active: 0
   efficiency: 69
-<<<<<<< HEAD
   seedPrefab: {fileID: 0}
-=======
-  seedPrefab: {fileID: 2381264490074033244}
->>>>>>> graphics_changes
   seedSprite: {fileID: 21300000, guid: fccfd33e1de805a4296ebd5bb57cc966, type: 3}
   seedlingSprite: {fileID: 21300000, guid: 41322bfbe934bda4187fa7ea86f0caed, type: 3}
   saplingSprite: {fileID: 21300000, guid: 5a4f446d2ed29ae4fa64c12e7972b630, type: 3}

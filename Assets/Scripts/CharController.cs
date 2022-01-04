@@ -10,7 +10,13 @@ namespace Main
         private int _inventorySelected = 0;
         private GameObject _loadout;
         private Rigidbody2D _rigidbody2d;
-        public Field[] myForest = {};
+        public Field[] myForest = { };
+        Animator m_Animator;
+        
+        Vector2 lookDirection = new Vector2(1,0);
+        public float speed = 1.8f;
+        float horizontal;
+        float vertical;
 
         private void SetInventory()
         {
@@ -27,21 +33,23 @@ namespace Main
             var cwd = System.IO.Directory.GetCurrentDirectory();
             myForest = GSOController.ReadForest(cwd, myForest);
             _rigidbody2d = GetComponent<Rigidbody2D>();
+            m_Animator = GetComponent<Animator>();
             SetInventory();
         }
 
         // Update is called once per frame
         void Update()
-        { 
-            var horizontal = Input.GetAxis("Horizontal");
-            var vertical = Input.GetAxis("Vertical");
-            var transform1 = transform;
-            Vector2 position = transform1.position;
-            position.x += 1.2f * horizontal * Time.deltaTime;
-            position.y += 1.2f * vertical * Time.deltaTime;
-            transform1.position = position;
-            
-            //implement check if seeds have been dropped
+        {
+            Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+            {
+                lookDirection.Set(move.x, move.y);
+                lookDirection.Normalize();
+            }
+        
+            m_Animator.SetFloat("MoveX", lookDirection.x);
+            m_Animator.SetFloat("MoveY", lookDirection.y);
+            // m_Animator.SetFloat("Speed", move.magnitude);
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
@@ -83,6 +91,16 @@ namespace Main
                     Debug.Log("No Seed Equipped");
                 }
             }
+        }
+        
+        void FixedUpdate()
+        {
+            var horizontal = Input.GetAxis("Horizontal");
+            var vertical = Input.GetAxis("Vertical");
+            Vector2 position = _rigidbody2d.position;
+            position.x = position.x + speed * horizontal * Time.deltaTime;
+            position.y = position.y + speed * vertical * Time.deltaTime;
+            _rigidbody2d.MovePosition(position);
         }
     }
 }

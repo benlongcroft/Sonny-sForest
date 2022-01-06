@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2381264490074033241}
   - component: {fileID: 2381264490074033242}
-  - component: {fileID: 2381264490074033243}
+  - component: {fileID: 1964876735589143534}
   m_Layer: 7
   m_Name: Fovir Fir
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &2381264490074033243
+--- !u!114 &1964876735589143534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,23 +92,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2381264490074033244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f151133d7004558a22f8129d5e56c6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 883fc5895a9f4d1baefadfffd4f03cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   location: 000000000000000000000000
   stage: seed
-  hardiness: 67
-  pollutionThreshold: 93
+  hardiness: 65
+  pollutionThreshold: 87
   lifespan: 45
-  seedGrowthTime: 3
+  seedGrowthTime: 4
   diseaseResistance: 23
   treeType: Fovir Fir
   active: 0
-  efficiency: 69
-  seedPrefab: {fileID: 0}
+  efficiency: 57
+  seedItem: {fileID: 11400000, guid: af67bad1eeda04310905140ef9efe9eb, type: 2}
   seedSprite: {fileID: 21300000, guid: fccfd33e1de805a4296ebd5bb57cc966, type: 3}
-  seedlingSprite: {fileID: 21300000, guid: 41322bfbe934bda4187fa7ea86f0caed, type: 3}
+  seedlingSprite: {fileID: 21300000, guid: cedec0ac8465a3a47b661e89a7d5aa9e, type: 3}
   saplingSprite: {fileID: 21300000, guid: 5a4f446d2ed29ae4fa64c12e7972b630, type: 3}
   treeSprite: {fileID: 21300000, guid: 67cf65b79da74ed48ab32548b607ce8a, type: 3}
-  ancientSprite: {fileID: 21300000, guid: 4b48caeadb79a81468670dbbdc052107, type: 3}
-  deadSprite: {fileID: 21300000, guid: fa80b9763fa447c4282bedffbb2c15d8, type: 3}
+  ancientSprite: {fileID: 21300000, guid: bbeaf083641369b4881c0389286b08f9, type: 3}
+  deadSprite: {fileID: 21300000, guid: f16c2cf123c77924799b68fe029d69cc, type: 3}

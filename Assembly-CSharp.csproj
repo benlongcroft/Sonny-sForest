@@ -61,9 +61,9 @@
      <Compile Include="Assets\Scripts\Inventory\InventoryItem.cs" />
      <Compile Include="Assets\Scripts\OpenShop.cs" />
      <Compile Include="Assets\Scripts\Forest\TreeController.cs" />
-     <Compile Include="Assets\Scripts\Inventory\InventorySystem.cs" />
      <Compile Include="Assets\Scripts\Forest\SubPlotController.cs" />
      <Compile Include="Assets\Scripts\LoadOut.cs" />
+     <Compile Include="Assets\Scripts\Inventory\InventorySystem.cs" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.24f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

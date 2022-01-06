@@ -20,6 +20,7 @@ namespace Forest
         private string[] _stages = {"seed", "seedling", "sapling", "tree", "ancient", "dead"};
         public int droppedSeeds = 0;
 
+        public InventorySystem myInventory;
         public SpriteRenderer treeSpriteRenderer;
         public TreeController treeController;
 
@@ -55,7 +56,8 @@ namespace Forest
                     
                     if (treeController.stage == "tree" || treeController.stage == "ancient")
                     {
-                        treeController.GrowSeed(droppedSeeds);
+                        // treeController.GrowSeed(droppedSeeds);
+                        myInventory.Add(treeController.seedItem);
                     }
                     
                     GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
@@ -86,9 +88,10 @@ namespace Forest
             treeController.location = loc;
             treeController.stage = "seed";
             treeController.active = true;
-            
-            treeController.seedPrefab = Instantiate(t.gameObject, treeController.transform.position + Vector3.down * 0.4f, Quaternion.identity);
-            treeController.seedPrefab.SetActive(false);
+
+            treeController.seedItem = t.seedItem;
+            // treeController.seedPrefab = Instantiate(t.gameObject, treeController.transform.position + Vector3.down * 0.4f, Quaternion.identity);
+            // treeController.seedPrefab.SetActive(false);
 
             Destroy(t.gameObject);
             

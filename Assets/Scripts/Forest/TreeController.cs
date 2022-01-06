@@ -1,4 +1,5 @@
 using System;
+using Inventory;
 using UnityEngine;
 
 namespace Forest
@@ -17,7 +18,7 @@ namespace Forest
         public bool active;
         public float efficiency;
 
-        public GameObject seedPrefab;
+        public InventoryItemData seedItem;
         
         public Sprite seedSprite;
 
@@ -31,21 +32,21 @@ namespace Forest
 
         public Sprite deadSprite;
 
-        public void GrowSeed(int droppedSeeds)
-        {
-            if (droppedSeeds == 0)
-            {
-                seedPrefab.SetActive(true);
-                seedPrefab.name = "seed-" + droppedSeeds;
-            }
-            else
-            {
-                GameObject g = Instantiate(seedPrefab, seedPrefab.transform.position + Vector3.down * 0.4f,
-                    Quaternion.identity);
-                g.name = "seed-" + droppedSeeds;
-                g.SetActive(true);
-            }
-        }
+        // public void GrowSeed(int droppedSeeds)
+        // {
+        //     if (droppedSeeds == 0)
+        //     {
+        //         seedPrefab.SetActive(true);
+        //         seedPrefab.name = "seed-" + droppedSeeds;
+        //     }
+        //     else
+        //     {
+        //         GameObject g = Instantiate(seedPrefab, seedPrefab.transform.position + Vector3.down * 0.4f,
+        //             Quaternion.identity);
+        //         g.name = "seed-" + droppedSeeds;
+        //         g.SetActive(true);
+        //     }
+        // }
         
         public Sprite SetSprite()
         {

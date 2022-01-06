@@ -18,6 +18,11 @@ namespace Main
         float horizontal;
         float vertical;
 
+        private void CheckNewSeeds()
+        {
+            LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize);
+        }
+        
         private void SetInventory()
         {
             LoadOut.Instance.SetSprite(myInventory.Inventory[_inventorySelected].Data.GetSpriteIcon());
@@ -46,7 +51,8 @@ namespace Main
                 lookDirection.Set(move.x, move.y);
                 lookDirection.Normalize();
             }
-        
+            
+            
             m_Animator.SetFloat("MoveX", lookDirection.x);
             m_Animator.SetFloat("MoveY", lookDirection.y);
             m_Animator.SetFloat("Speed", move.magnitude);
@@ -62,10 +68,12 @@ namespace Main
                 {
                     _inventorySelected = 0;
                 }
-            
                 SetInventory();
             }
-    
+            
+            //must be continually checked to see if seeds have been dropped
+            CheckNewSeeds();
+            
             if(Input.GetKeyDown(KeyCode.P))
             {
                 var hit = Physics2D.Raycast(_rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));

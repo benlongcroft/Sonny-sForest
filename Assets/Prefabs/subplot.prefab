@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1425161131596928883}
   - component: {fileID: 3339803854439910664}
-  - component: {fileID: 224626011828861495}
+  - component: {fileID: 6091875810299308238}
   m_Layer: 6
   m_Name: subplot
   m_TagString: Untagged
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &224626011828861495
+--- !u!114 &6091875810299308238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,17 +93,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2622786525488121037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa751384f03c4fcdb8357f71b60d21e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 997c4ed6fe3544319729b03607520fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   subPlotID: 0
   seeded: 0
   timer: 0
+  lastTimer: 0
   dead: 0
-  seedsDropped: 0
   currentStage: 0
+  droppedSeeds: 0
   treeSpriteRenderer: {fileID: 4047706289318148640}
-  treeController: {fileID: 4668971247542611253}
+  treeController: {fileID: 8917408295282889582}
 --- !u!1 &3801722023565094286
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4287031083678716463}
   - component: {fileID: 4047706289318148640}
-  - component: {fileID: 4668971247542611253}
+  - component: {fileID: 8917408295282889582}
   m_Layer: 6
   m_Name: child
   m_TagString: Untagged
@@ -187,7 +188,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &4668971247542611253
+--- !u!114 &8917408295282889582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3801722023565094286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f151133d7004558a22f8129d5e56c6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 883fc5895a9f4d1baefadfffd4f03cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   location: 000000000000000000000000

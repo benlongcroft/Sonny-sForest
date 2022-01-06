@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2361702181239279746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.3151321, y: 2.3596, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   myInventory: {fileID: 0}
   myForest:
   - {fileID: 0}
+  speed: 1.8
 --- !u!212 &5643626817210109365
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -90,12 +91,12 @@ SpriteRenderer:
   m_SortingLayerID: -1302417939
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 918984183597436423, guid: 4a5151515b18841de97e167b064a1752, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 918984183597436423, guid: 75b3daaa815ba47f8975527fccb5b402, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.13, y: 1.37}
+  m_Size: {x: 0.71, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -140,7 +141,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.71, y: 1}
-    newSize: {x: 1.13, y: 1.37}
+    newSize: {x: 0.71, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

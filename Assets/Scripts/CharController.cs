@@ -13,7 +13,7 @@ namespace Main
         public Field[] myForest = { };
         Animator m_Animator;
         
-        Vector2 lookDirection = new Vector2(1,0);
+        Vector2 lookDirection = new Vector2(0,0);
         public float speed = 1.8f;
         float horizontal;
         float vertical;
@@ -49,6 +49,7 @@ namespace Main
         
             m_Animator.SetFloat("MoveX", lookDirection.x);
             m_Animator.SetFloat("MoveY", lookDirection.y);
+            m_Animator.SetFloat("Speed", move.magnitude);
             // m_Animator.SetFloat("Speed", move.magnitude);
 
             if (Input.GetKeyDown(KeyCode.Tab))

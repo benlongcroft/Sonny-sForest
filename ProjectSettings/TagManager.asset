@@ -11,9 +11,9 @@ TagManager:
   - Trees
   - Water
   - UI
-  - plots
-  - seeds
   - char
+  - plots
+  - 
   - 
   - 
   - 
@@ -41,9 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: plots
+  - name: char
     uniqueID: 1275237805
     locked: 0
-  - name: char
+  - name: plots
     uniqueID: 2992549357
     locked: 0

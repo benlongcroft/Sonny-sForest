@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1425161131596928883}
   - component: {fileID: 3339803854439910664}
-  - component: {fileID: 6091875810299308238}
-  m_Layer: 6
+  - component: {fileID: 6696769862688409899}
+  m_Layer: 7
   m_Name: subplot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,10 +70,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1275237805
-  m_SortingLayer: 1
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 659c59c878eac344da81b3d6d1783568, type: 3}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,10 +81,10 @@ SpriteRenderer:
   m_Size: {x: 1.73, y: 0.87}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &6091875810299308238
+--- !u!114 &6696769862688409899
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,18 +93,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2622786525488121037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 997c4ed6fe3544319729b03607520fee, type: 3}
+  m_Script: {fileID: 11500000, guid: 883fc5895a9f4d1baefadfffd4f03cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subPlotID: 0
-  seeded: 0
-  timer: 0
-  lastTimer: 0
-  dead: 0
-  currentStage: 0
-  droppedSeeds: 0
-  treeSpriteRenderer: {fileID: 4047706289318148640}
-  treeController: {fileID: 8917408295282889582}
+  location: 000000000000000000000000
+  stage: 
+  hardiness: 0
+  pollutionThreshold: 0
+  lifespan: 0
+  seedGrowthTime: 0
+  diseaseResistance: 0
+  treeType: 
+  active: 0
+  efficiency: 0
+  seedItem: {fileID: 0}
+  seedSprite: {fileID: 0}
+  seedlingSprite: {fileID: 0}
+  saplingSprite: {fileID: 0}
+  treeSprite: {fileID: 0}
+  ancientSprite: {fileID: 0}
+  deadSprite: {fileID: 0}
 --- !u!1 &3801722023565094286
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,8 +123,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4287031083678716463}
   - component: {fileID: 4047706289318148640}
-  - component: {fileID: 8917408295282889582}
-  m_Layer: 6
+  - component: {fileID: 528759924308015043}
+  m_Layer: 7
   m_Name: child
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3801722023565094286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.432, z: 0}
+  m_LocalPosition: {x: 0, y: -0.433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1425161131596928883}
@@ -174,21 +182,21 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1275237805
-  m_SortingLayer: 1
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c82720507ccb2bd4c96f066d72ced26f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.72, y: 0.87}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &8917408295282889582
+--- !u!114 &528759924308015043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,23 +205,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3801722023565094286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883fc5895a9f4d1baefadfffd4f03cff, type: 3}
+  m_Script: {fileID: 11500000, guid: 997c4ed6fe3544319729b03607520fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  location: 000000000000000000000000
-  stage: 
-  hardiness: 0
-  pollutionThreshold: 0
-  lifespan: 0
-  seedGrowthTime: 0
-  diseaseResistance: 0
-  treeType: 
-  active: 0
-  efficiency: 0
-  seedPrefab: {fileID: 0}
-  seedSprite: {fileID: 0}
-  seedlingSprite: {fileID: 0}
-  saplingSprite: {fileID: 0}
-  treeSprite: {fileID: 0}
-  ancientSprite: {fileID: 0}
-  deadSprite: {fileID: 0}
+  subPlotID: 0
+  seeded: 0
+  timer: 0
+  lastTimer: 0
+  dead: 0
+  currentStage: 0
+  droppedSeeds: 0
+  myInventory: {fileID: 0}
+  treeSpriteRenderer: {fileID: 3339803854439910664}
+  treeController: {fileID: 6696769862688409899}

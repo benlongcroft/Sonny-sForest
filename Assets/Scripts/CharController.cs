@@ -12,21 +12,25 @@ namespace Main
         private Rigidbody2D _rigidbody2d;
         public Field[] myForest = { };
         Animator m_Animator;
-        
-        Vector2 lookDirection = new Vector2(0,0);
+
+        private Vector2 lookDirection = new Vector2(0,0);
         public float speed = 1.8f;
-        float horizontal;
-        float vertical;
+        private static readonly int MoveX = Animator.StringToHash("MoveX");
+        private static readonly int MoveY = Animator.StringToHash("MoveY");
+        private static readonly int Speed = Animator.StringToHash("Speed");
 
         private void CheckNewSeeds()
         {
             LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize);
         }
         
-        private void SetInventory()
+        private void SetLoadout()
         {
-            LoadOut.Instance.SetSprite(myInventory.Inventory[_inventorySelected].Data.GetSpriteIcon());
-            LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize);
+            var item = myInventory.Inventory[_inventorySelected];
+            LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
+            LoadOut.Instance.SetQuantity(item.StackSize);
+            LoadOut.Instance.SetItemName(item.Data.displayName);
+            Destroy(_loadout);
             _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
             _loadout.name = "loadout";
             _loadout.SetActive(false);
@@ -39,7 +43,7 @@ namespace Main
             myForest = GSOController.ReadForest(cwd, myForest);
             _rigidbody2d = GetComponent<Rigidbody2D>();
             m_Animator = GetComponent<Animator>();
-            SetInventory();
+            SetLoadout();
         }
 
         // Update is called once per frame
@@ -53,14 +57,14 @@ namespace Main
             }
             
             
-            m_Animator.SetFloat("MoveX", lookDirection.x);
-            m_Animator.SetFloat("MoveY", lookDirection.y);
-            m_Animator.SetFloat("Speed", move.magnitude);
+            m_Animator.SetFloat(MoveX, lookDirection.x);
+            m_Animator.SetFloat(MoveY, lookDirection.y);
+            m_Animator.SetFloat(Speed, move.magnitude);
             // m_Animator.SetFloat("Speed", move.magnitude);
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (_inventorySelected+1 == myInventory.Inventory.Count)
+                if (_inventorySelected+1 != myInventory.Inventory.Count)
                 {
                     _inventorySelected += 1;
                 }
@@ -68,7 +72,7 @@ namespace Main
                 {
                     _inventorySelected = 0;
                 }
-                SetInventory();
+                SetLoadout();
             }
             
             //must be continually checked to see if seeds have been dropped
@@ -91,8 +95,8 @@ namespace Main
                     }
                     else
                     {
-                        myInventory.Inventory[_inventorySelected].RemoveFromStack();
-                        SetInventory();
+                        myInventory.Remove(myInventory.Inventory[_inventorySelected].Data);
+                        SetLoadout();
                     }
                 }
                 else

@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Forest\Plot.cs" />
      <Compile Include="Assets\Scripts\CharController.cs" />
      <Compile Include="Assets\Scripts\Forest\Field.cs" />
+     <Compile Include="Assets\Scripts\Inventory\InventorySystem.cs" />
      <Compile Include="Assets\Scripts\GSOController.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryItemData.cs" />
      <Compile Include="Assets\Scripts\PollutionBar.cs" />
@@ -63,7 +64,6 @@
      <Compile Include="Assets\Scripts\Forest\TreeController.cs" />
      <Compile Include="Assets\Scripts\Forest\SubPlotController.cs" />
      <Compile Include="Assets\Scripts\LoadOut.cs" />
-     <Compile Include="Assets\Scripts\Inventory\InventorySystem.cs" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.24f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6284610b79e4f98bdcfb13c48ef8251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSeed: {fileID: 11400000, guid: af67bad1eeda04310905140ef9efe9eb, type: 2}
+  startSeeds: []
 --- !u!4 &242124326
 Transform:
   m_ObjectHideFlags: 0

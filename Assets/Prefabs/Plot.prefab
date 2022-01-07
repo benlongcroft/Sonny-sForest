@@ -345,6 +345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sp3
       objectReference: {fileID: 0}
+    - target: {fileID: 6091875810299308238, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
+      propertyPath: subPlotID
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
 --- !u!4 &2882287278174632657 stripped
@@ -422,6 +426,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sp1
       objectReference: {fileID: 0}
+    - target: {fileID: 6091875810299308238, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
+      propertyPath: subPlotID
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
 --- !u!4 &5318308501685739265 stripped
@@ -498,6 +506,10 @@ PrefabInstance:
     - target: {fileID: 2622786525488121037, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_Name
       value: sp2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091875810299308238, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
+      propertyPath: subPlotID
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}

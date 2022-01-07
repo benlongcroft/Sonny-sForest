@@ -8,15 +8,15 @@ namespace Inventory
         private Dictionary<InventoryItemData, InventoryItem> _itemDictionary;
         public List<InventoryItem> Inventory { get; private set; }
 
-        public InventoryItemData startSeed;
+        public List<InventoryItemData> startSeeds;
 
         private void Awake()
         {
             Inventory = new List<InventoryItem>();
             _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
-            for (var x = 0; x < 3; x++)
+            foreach (var seed in startSeeds)
             {
-                this.Add(startSeed);
+                this.Add(seed);
             }
         }
 

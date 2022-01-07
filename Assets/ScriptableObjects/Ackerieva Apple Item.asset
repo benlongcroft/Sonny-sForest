@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09317765749247bcaf15a89bb263d18, type: 3}
+  m_Name: Ackerieva Apple Item
+  m_EditorClassIdentifier: 
+  id: 003
+  displayName: Ackerieva Apple
+  prefab: {fileID: 7803650447790728960, guid: 5993f040883a64a04ba2050e19a3163b, type: 3}

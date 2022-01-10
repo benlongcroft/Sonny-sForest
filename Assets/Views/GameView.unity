@@ -830,10 +830,6 @@ PrefabInstance:
       propertyPath: myForest.Array.data[0]
       value: 
       objectReference: {fileID: 1647956404}
-    - target: {fileID: 5643626817210109365, guid: 7b7fb62e1124e464ca11e55dc71234c6, type: 3}
-      propertyPath: m_Color.a
-      value: 0.92156863
-      objectReference: {fileID: 0}
     - target: {fileID: 6838980520334508542, guid: 7b7fb62e1124e464ca11e55dc71234c6, type: 3}
       propertyPath: m_RootOrder
       value: 0

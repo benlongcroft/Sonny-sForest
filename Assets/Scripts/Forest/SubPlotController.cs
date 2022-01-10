@@ -13,12 +13,16 @@ namespace Forest
     {
         public int subPlotID;
         public bool seeded = false;
-        public float timer = 0;
-        public float lastTimer = 0;
         public bool dead = false;
         public int currentStage = 0;
+        
+        public float timer = 0;
+        public float lastTimer = 0;
+
+        public int seedsDropped = 0;
+        public float lastSeedTimer = 0;
+        
         private string[] _stages = {"seed", "seedling", "sapling", "tree", "ancient", "dead"};
-        public int droppedSeeds = 0;
 
         public InventorySystem myInventory;
         public SpriteRenderer treeSpriteRenderer;
@@ -26,9 +30,8 @@ namespace Forest
 
         private float GrowTime()
         {
-            var stageMultipliers = new Dictionary<string, int>(){ {"seed",0}, {"seedling", 1}, {"sapling",2}, {"tree", 3}, {"ancient", 5}, {"dead", 0}};
-            float k = (treeController.lifespan / 12);
-            return stageMultipliers[treeController.stage] * k;
+            var stageMultipliers = new Dictionary<string, float>(){ {"seed",0}, {"seedling", 0.1f}, {"sapling",0.2f}, {"tree", 0.3f}, {"ancient", 0.4f}};
+            return treeController.lifespan * stageMultipliers[treeController.stage];
             //key error here?
         }
 
@@ -40,7 +43,7 @@ namespace Forest
             { 
                 timer = timer + Time.deltaTime;
                 float g = GrowTime();
-                Debug.Log((timer - lastTimer)+"/"+g);
+                // Debug.Log((timer - lastTimer)+"/"+g);
                 if (timer - lastTimer >= g)
                 {
                     currentStage += 1;
@@ -51,19 +54,25 @@ namespace Forest
                     if (treeController.stage == "dead")
                     {
                         dead = true;
-                        return;
                     }
-                    
-                    if (treeController.stage == "tree" || treeController.stage == "ancient")
-                    {
-                        // treeController.GrowSeed(droppedSeeds);
-                        myInventory.Add(treeController.seedItem);
-                    }
-                    
+
                     GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
                     
                     lastTimer = timer;
                 }   
+            }
+            
+            if (treeController.stage == "tree" || treeController.stage == "ancient")
+            {
+                Debug.Log(timer-lastSeedTimer+"/"+treeController.seedGrowthTime);
+                if ((timer - lastSeedTimer) >= treeController.seedGrowthTime)
+                {
+                    Debug.Log("Added new seed!");
+                    myInventory.Add(treeController.seedItem);
+                    seedsDropped += 1;
+                    lastSeedTimer = timer;
+                }
+
             }
 
         }
@@ -75,7 +84,7 @@ namespace Forest
             treeController.lifespan = t.lifespan;
             treeController.diseaseResistance = t.diseaseResistance;
             treeController.pollutionThreshold = t.pollutionThreshold;
-            treeController.seedGrowthTime = t.seedGrowthTime;
+            treeController.seedGrowthTime = (int) (treeController.lifespan * 0.7f / 5);
             treeController.treeType = t.treeType;
 
             treeController.seedSprite = t.seedSprite;
@@ -90,8 +99,6 @@ namespace Forest
             treeController.active = true;
 
             treeController.seedItem = t.seedItem;
-            // treeController.seedPrefab = Instantiate(t.gameObject, treeController.transform.position + Vector3.down * 0.4f, Quaternion.identity);
-            // treeController.seedPrefab.SetActive(false);
 
             Destroy(t.gameObject);
             

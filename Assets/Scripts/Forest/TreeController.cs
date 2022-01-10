@@ -32,22 +32,6 @@ namespace Forest
 
         public Sprite deadSprite;
 
-        // public void GrowSeed(int droppedSeeds)
-        // {
-        //     if (droppedSeeds == 0)
-        //     {
-        //         seedPrefab.SetActive(true);
-        //         seedPrefab.name = "seed-" + droppedSeeds;
-        //     }
-        //     else
-        //     {
-        //         GameObject g = Instantiate(seedPrefab, seedPrefab.transform.position + Vector3.down * 0.4f,
-        //             Quaternion.identity);
-        //         g.name = "seed-" + droppedSeeds;
-        //         g.SetActive(true);
-        //     }
-        // }
-        
         public Sprite SetSprite()
         {
             Debug.Log("Sprite set is "+stage);

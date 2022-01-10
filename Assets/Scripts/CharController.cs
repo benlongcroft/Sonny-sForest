@@ -74,10 +74,7 @@ namespace Main
                 }
                 SetLoadout();
             }
-            
-            //must be continually checked to see if seeds have been dropped
-            CheckNewSeeds();
-            
+
             if(Input.GetKeyDown(KeyCode.P))
             {
                 var hit = Physics2D.Raycast(_rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
@@ -104,6 +101,8 @@ namespace Main
                     Debug.Log("No Seed Equipped");
                 }
             }
+            //must be continually checked to see if seeds have been dropped
+            CheckNewSeeds();
         }
         
         void FixedUpdate()

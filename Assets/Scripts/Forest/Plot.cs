@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Main;
+using UnityEngine;
 
 namespace Forest
 {
@@ -25,12 +26,11 @@ namespace Forest
         {
             for(var i =0; i < 4; i += 1)
             {
-                if (subPlots[i].seeded == false && subPlots[i].dead == false)
-                {
-                    subPlots[i].SetTree(treeControllerObj, new[] {fieldID, plotID, subPlots[i].subPlotID});
-                    GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
-                    return i;
-                }
+                if (subPlots[i].dead) continue;
+                if (subPlots[i].seeded) continue;
+                subPlots[i].SetTree(treeControllerObj, new[] {fieldID, plotID, subPlots[i].subPlotID});
+                GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
+                return i;
             }
             return -1;
         }

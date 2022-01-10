@@ -440,7 +440,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 1
+  m_SpriteSortPoint: 0
 --- !u!1001 &210508947079202003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -495,14 +495,6 @@ PrefabInstance:
     - target: {fileID: 2622786525488121037, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
       propertyPath: m_Name
       value: sp0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2622786525488121037, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3801722023565094286, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28fb5066de8024cb49fc124f721f86ef, type: 3}

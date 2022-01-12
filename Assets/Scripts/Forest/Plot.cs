@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using AOT;
 using Main;
 using UnityEngine;
 
 namespace Forest
 {
-    public class Plot : Field
+    public class Plot : MonoBehaviour
     {
-
+        public Field field;
+        
         public List<SubPlotController> subPlots = new List<SubPlotController> {};
     
         public int plotID;
@@ -28,7 +30,7 @@ namespace Forest
             {
                 if (subPlots[i].dead) continue;
                 if (subPlots[i].seeded) continue;
-                subPlots[i].SetTree(treeControllerObj, new[] {fieldID, plotID, subPlots[i].subPlotID});
+                subPlots[i].SetTree(treeControllerObj, new[] {field.fieldID, plotID, subPlots[i].subPlotID});
                 GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
                 return i;
             }

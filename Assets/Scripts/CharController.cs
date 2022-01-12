@@ -21,19 +21,43 @@ namespace Main
 
         private void CheckNewSeeds()
         {
-            LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize);
+            if (myInventory.Inventory.Count == 0)
+            {
+                makeLoadoutNull();
+            }
+            else
+            {
+                LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize); 
+            }
         }
         
         private void SetLoadout()
         {
-            var item = myInventory.Inventory[_inventorySelected];
-            LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
-            LoadOut.Instance.SetQuantity(item.StackSize);
-            LoadOut.Instance.SetItemName(item.Data.displayName);
-            Destroy(_loadout);
-            _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
-            _loadout.name = "loadout";
-            _loadout.SetActive(false);
+            if (_inventorySelected != myInventory.Inventory.Count)
+            {
+                var item = myInventory.Inventory[_inventorySelected];
+                LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
+                LoadOut.Instance.SetQuantity(item.StackSize);
+                LoadOut.Instance.SetItemName(item.Data.displayName);
+                Destroy(_loadout);
+                _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
+                _loadout.name = "loadout";
+                _loadout.SetActive(false);
+            }
+            else
+            {
+                makeLoadoutNull();
+
+            }
+        }
+
+        private void makeLoadoutNull()
+        {
+            _loadout = null;
+            LoadOut.Instance.SetSprite(null);
+            LoadOut.Instance.SetQuantity(0);
+            LoadOut.Instance.SetItemName("Empty");
+            _inventorySelected = -1;
         }
     
         // Start is called before the first frame update

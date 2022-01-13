@@ -36,13 +36,22 @@ namespace Main
             if (_inventorySelected != myInventory.Inventory.Count)
             {
                 var item = myInventory.Inventory[_inventorySelected];
-                LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
-                LoadOut.Instance.SetQuantity(item.StackSize);
-                LoadOut.Instance.SetItemName(item.Data.displayName);
-                Destroy(_loadout);
-                _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
-                _loadout.name = "loadout";
-                _loadout.SetActive(false);
+                if (item.Data.displayName == "Money")
+                {
+                    LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
+                    LoadOut.Instance.SetQuantity(item.StackSize);
+                    LoadOut.Instance.SetItemName(item.Data.displayName);
+                }
+                else
+                {
+                    LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
+                    LoadOut.Instance.SetQuantity(item.StackSize);
+                    LoadOut.Instance.SetItemName(item.Data.displayName);
+                    Destroy(_loadout);
+                    _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
+                    _loadout.name = "loadout";
+                    _loadout.SetActive(false);   
+                }
             }
             else
             {

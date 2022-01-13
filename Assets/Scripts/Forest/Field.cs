@@ -9,44 +9,48 @@ namespace Forest
         public int fieldID;
         public Plot[] plots = { };
         public GameObject smoke;
-
+        public bool unlocked { private set; get; }
         public void Awake()
         {
             if (fieldID > 0)
             {
-                setNotActive();
+                SetNotActive();
             }
             else
             {
-                setActive();
+                SetActive();
             }
         }
 
-        public void setActive()
+        public void SetActive()
         {
-            foreach (Plot p in plots)
+            foreach (var p in plots)
             {
                 p.gameObject.SetActive(true);
             }
             Destroy(this.GetComponent<PolygonCollider2D>());
-            foreach (ParticleSystem s in smoke.GetComponentsInChildren<ParticleSystem>())
+            foreach (var s in smoke.GetComponentsInChildren<ParticleSystem>())
             {
                 s.gameObject.SetActive(false);
                 s.Stop();
             }
+
+            unlocked = true;
         }
         
-        public void setNotActive()
+        public void SetNotActive()
         {
-            foreach (Plot p in plots)
+            foreach (var p in plots)
             {
                 p.gameObject.SetActive(false);
-                foreach (ParticleSystem s in smoke.GetComponentsInChildren<ParticleSystem>())
+                foreach (var s in smoke.GetComponentsInChildren<ParticleSystem>())
                 {
                     s.gameObject.SetActive(true);
                     s.Play();
                 }
             }
+
+            unlocked = false;
         }
     }
 

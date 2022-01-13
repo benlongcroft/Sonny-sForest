@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using Forest;
 using Main;
 using UnityEngine;
@@ -15,6 +15,9 @@ namespace Scripts
         private float _pollutionCount = 0;
         private bool _generatorTickStarted = false;
         private Field[] _currentForest;
+        private float _currentEfficiency = 0;
+        private int _currentTreeCount = 0;
+        private DateTime _forestGenerationTime = DateTime.Now;
     
         // Start is called before the first frame update
         void Start()
@@ -35,21 +38,52 @@ namespace Scripts
             if (!_generatorTickStarted)
             {
                _generatorTickStarted = true;
-               _pollutionCount += 1;
+               SetEfficiencyAndTreeCount();
+               TimeSpan timeSinceCreation = DateTime.Now - _forestGenerationTime;
+
+               // calculate pollution count using formula created by Ben 
+               _pollutionCount = ((float) timeSinceCreation.TotalHours) * (1 - _currentEfficiency) + 10;
             }
 
-            _generatorTickStarted = false;
-            
             //Print the time of when the function is first called.
             Debug.Log("Started Coroutine at timestamp : " + Time.time);
+ 
+            //yield on a new YieldInstruction that waits for 1 second.
+            yield return new WaitForSeconds(1);
+            _generatorTickStarted = false;
 
-            //yield on a new YieldInstruction that waits for 2 seconds.
-            yield return new WaitForSeconds(2);
-
-            //After we have waited 2 seconds print the time again.
+            //After we have waited 1 second print the time again.
             Debug.Log("Finished Coroutine at timestamp : " + Time.time);
             StartCoroutine(GeneratorTick());
         }
         
+        private void SetEfficiencyAndTreeCount()
+        {
+            int totalTreeCount = 0;
+            float totalEfficiency = 0;
+            
+            Debug.Log("Start efficiency count at timestamp : " + Time.time);
+            
+            foreach (Field indivField in _currentForest)
+            {
+                foreach (Plot indivPlot in indivField.plots)
+                {
+                    foreach (SubPlotController indivSpc in indivPlot.subPlots)
+                    {
+                        if (indivSpc.treeController.active)
+                        {
+                            totalTreeCount++;
+                            totalEfficiency = indivSpc.treeController.efficiency;
+                        }
+                    }
+                }
+            }
+
+            _currentEfficiency = totalEfficiency / totalTreeCount;
+            _currentTreeCount = totalTreeCount;
+
+            Debug.Log("Finished  efficiency count at timestamp : " + Time.time);
+        }
     }
+    
 }

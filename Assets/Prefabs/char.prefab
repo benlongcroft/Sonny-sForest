@@ -50,7 +50,7 @@ MonoBehaviour:
   myInventory: {fileID: 0}
   myForest:
   - {fileID: 0}
-  speed: 1.8
+  speed: 4.6
 --- !u!212 &5643626817210109365
 SpriteRenderer:
   m_ObjectHideFlags: 0

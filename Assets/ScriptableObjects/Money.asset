@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09317765749247bcaf15a89bb263d18, type: 3}
   m_Name: Money
   m_EditorClassIdentifier: 
-  id: 
-  displayName: 
-  prefab: {fileID: 0}
+  id: 004
+  displayName: Money
+  prefab: {fileID: 3688429223053762297, guid: f93fa593ed47a4bbebe63177bbe59b35, type: 3}

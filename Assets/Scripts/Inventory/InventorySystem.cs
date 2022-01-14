@@ -15,6 +15,13 @@ namespace Inventory
             _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
             foreach (var seed in startSeeds)
             {
+                if (seed.displayName == "Money")
+                {
+                    for (int x = 0; x<200; x++)
+                    {
+                        this.Add(seed);
+                    }
+                }
                 this.Add(seed);
             }
         }

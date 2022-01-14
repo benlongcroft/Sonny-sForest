@@ -24,7 +24,8 @@ namespace Main
         {
             if (myInventory.Inventory.Count == 0)
             {
-                makeLoadoutNull();
+                _inventorySelected += 1;
+                SetLoadOut(myInventory.Inventory[_inventorySelected]);
             }
             else
             {
@@ -50,7 +51,7 @@ namespace Main
                 }
                 else
                 {
-                   SetLoadOut(item);
+                    SetLoadOut(item);
                     Destroy(_loadout);
                     _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
                     _loadout.name = "loadout";
@@ -77,7 +78,7 @@ namespace Main
         void Start()
         {
             var cwd = System.IO.Directory.GetCurrentDirectory();
-            myForest = GSOController.ReadForest(cwd, myForest);
+            // myForest = GSOController.ReadForest(cwd, myForest);
             _rigidbody2d = GetComponent<Rigidbody2D>();
             m_Animator = GetComponent<Animator>();
             ChangeLoadOut();
@@ -129,7 +130,7 @@ namespace Main
                     }
                     else
                     {
-                        myInventory.Remove(myInventory.Inventory[_inventorySelected].Data);
+                        myInventory.Inventory[_inventorySelected].RemoveFromStack();
                         ChangeLoadOut();
                     }
                 }

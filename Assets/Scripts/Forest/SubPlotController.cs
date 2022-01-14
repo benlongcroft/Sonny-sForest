@@ -56,7 +56,7 @@ namespace Forest
                         dead = true;
                     }
 
-                    GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
+                    // GSOController.UpdateTree(System.IO.Directory.GetCurrentDirectory(),this);
                     
                     lastTimer = timer;
                 }   
@@ -64,7 +64,7 @@ namespace Forest
             
             if (treeController.stage == "tree" || treeController.stage == "ancient")
             {
-                Debug.Log(timer-lastSeedTimer+"/"+treeController.seedGrowthTime);
+                // Debug.Log(timer-lastSeedTimer+"/"+treeController.seedGrowthTime);
                 if ((timer - lastSeedTimer) >= treeController.seedGrowthTime)
                 {
                     Debug.Log("Added new seed!");

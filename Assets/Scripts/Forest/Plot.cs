@@ -31,7 +31,7 @@ namespace Forest
                 if (subPlots[i].dead) continue;
                 if (subPlots[i].seeded) continue;
                 subPlots[i].SetTree(treeControllerObj, new[] {field.fieldID, plotID, subPlots[i].subPlotID});
-                GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
+                // GSOController.SaveNewTree(System.IO.Directory.GetCurrentDirectory(), subPlots[i]);
                 return i;
             }
             return -1;

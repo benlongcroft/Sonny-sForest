@@ -104,7 +104,7 @@ MonoBehaviour:
   diseaseResistance: 17
   treeType: Fovir Fir
   active: 0
-  efficiency: 71
+  efficiency: 0.71
   seedItem: {fileID: 11400000, guid: af67bad1eeda04310905140ef9efe9eb, type: 2}
   seedSprite: {fileID: 21300000, guid: db920534692e7ba47a67a6337c8ed731, type: 3}
   seedlingSprite: {fileID: 21300000, guid: 55ea6e53999896b4bb4b01226e57adc6, type: 3}

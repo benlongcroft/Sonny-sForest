@@ -21,7 +21,7 @@ namespace Main
         private readonly Dictionary<int, float> ConversionRates = new Dictionary<int, float>()
             {{000, 0.2f}, {001, 0.5f}, {002, 0.7f}, {003, 0.6f}, {004, 1}};
 
-        private float balance = 0;
+        private int balance = 0;
         public Text balanceText;
         public Text fieldCost;
         public Text conversionValue;
@@ -48,21 +48,22 @@ namespace Main
         private void ChangeBalance(float amount)
         {
             balanceText.text = (balance + amount).ToString();
-            balance = balance + amount;
+            balance = (int) (balance + amount);
             if (amount < 0)
             {
-                for (var i = 0; i < amount; i++)
+                for (var _ = amount; _ < 0; _++)
                 {
                     myInventory.Inventory[0].RemoveFromStack();
                 }
             }
             else
             {
-                for (var i = 0; i < amount; i++)
+                for (var _ = 0; _ < amount; _++)
                 {
                     myInventory.Inventory[0].AddToStack();
                 }
             }
+            // CharController.SetLoadOut(myInventory.Inventory[0]);
         }
 
         private void Awake()
@@ -75,13 +76,19 @@ namespace Main
             fieldCost.text = FieldCosts[fields].ToString();
         }
 
+        private void Update()
+        {
+            balance = myInventory.Inventory[0].StackSize;
+            balanceText.text = balance.ToString();
+        }
+
         public void BuyField()
         {
             var nFields = GETFieldCount()-1;
             balance = myInventory.Inventory[0].StackSize;
             if (balance >= FieldCosts[nFields])
             {
-                ChangeBalance(-FieldCosts[nFields]);
+                ChangeBalance(-1*FieldCosts[nFields]);
                 myForest[nFields+1].SetActive();
                 fieldCost.text = FieldCosts[GETFieldCount()-1].ToString();
             }
@@ -95,7 +102,7 @@ namespace Main
             return index;
         }
 
-        private int CheckQuantity(int index)
+        private int CheckQuantity()
         {
             var qInput = quantity.text;
             var isNumeric = int.TryParse(qInput, out int amount);
@@ -115,7 +122,7 @@ namespace Main
             var id = int.Parse(myInventory.Inventory[index].Data.id);
             var maxQuantity = myInventory.Inventory[index].StackSize;
             
-            var amount = CheckQuantity(index);
+            var amount = CheckQuantity();
 
             if (amount <= 0 || amount >= maxQuantity) return;
             
@@ -132,7 +139,7 @@ namespace Main
             var id = int.Parse(myInventory.Inventory[index].Data.id);
             var maxQuantity = myInventory.Inventory[index].StackSize;
             
-            var amount = CheckQuantity(index);
+            var amount = CheckQuantity();
             
             if (amount <= 0 || amount >= maxQuantity) return;
             

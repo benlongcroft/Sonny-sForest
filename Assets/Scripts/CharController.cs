@@ -1,6 +1,7 @@
 using Forest;
 using Inventory;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Main
 {
@@ -30,23 +31,26 @@ namespace Main
                 LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize); 
             }
         }
+
+        public static void SetLoadOut(InventoryItem item)
+        {
+            LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
+            LoadOut.Instance.SetQuantity(item.StackSize);
+            LoadOut.Instance.SetItemName(item.Data.displayName);
+        }
         
-        private void SetLoadout()
+        private void ChangeLoadOut()
         {
             if (_inventorySelected != myInventory.Inventory.Count)
             {
                 var item = myInventory.Inventory[_inventorySelected];
                 if (item.Data.displayName == "Money")
                 {
-                    LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
-                    LoadOut.Instance.SetQuantity(item.StackSize);
-                    LoadOut.Instance.SetItemName(item.Data.displayName);
+                    SetLoadOut(item);
                 }
                 else
                 {
-                    LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
-                    LoadOut.Instance.SetQuantity(item.StackSize);
-                    LoadOut.Instance.SetItemName(item.Data.displayName);
+                   SetLoadOut(item);
                     Destroy(_loadout);
                     _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
                     _loadout.name = "loadout";
@@ -76,7 +80,7 @@ namespace Main
             myForest = GSOController.ReadForest(cwd, myForest);
             _rigidbody2d = GetComponent<Rigidbody2D>();
             m_Animator = GetComponent<Animator>();
-            SetLoadout();
+            ChangeLoadOut();
         }
 
         // Update is called once per frame
@@ -105,7 +109,7 @@ namespace Main
                 {
                     _inventorySelected = 0;
                 }
-                SetLoadout();
+                ChangeLoadOut();
             }
 
             if(Input.GetKeyDown(KeyCode.P))
@@ -126,7 +130,7 @@ namespace Main
                     else
                     {
                         myInventory.Remove(myInventory.Inventory[_inventorySelected].Data);
-                        SetLoadout();
+                        ChangeLoadOut();
                     }
                 }
                 else
@@ -136,6 +140,18 @@ namespace Main
             }
             //must be continually checked to see if seeds have been dropped
             CheckNewSeeds();
+
+            if (Input.GetKeyDown(KeyCode.C) && Input.GetKeyDown(KeyCode.M))
+            {
+                //cheat code for God mode
+                foreach (var item in myInventory.Inventory)
+                {
+                    for (var _ = 0; _ < 999; _++)
+                    {
+                        item.AddToStack();
+                    }
+                }
+            }
         }
         
         void FixedUpdate()

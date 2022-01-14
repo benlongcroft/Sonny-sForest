@@ -9,35 +9,23 @@ namespace Inventory
         public List<InventoryItem> Inventory { get; private set; }
 
         public List<InventoryItemData> startSeeds;
+
         private void Awake()
         {
             Inventory = new List<InventoryItem>();
             _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
             foreach (var seed in startSeeds)
             {
-                if (seed.displayName == "Money")
-                {
-                    for (int x = 0; x<200; x++)
-                    {
-                        this.Add(seed);
-                    }
-                }
-                else
-                {
-                    for (var i = 0; i < 200; i++)
-                    {
-                        this.Add(seed);
-                    }
-                }
+                this.Add(seed);
             }
         }
 
-        public int Find(string name)
+        public int Find(string itemName)
         {
             int i = 0;
             foreach (var item in Inventory)
             {
-                if (item.Data.displayName == name)
+                if (item.Data.displayName == itemName)
                 {
                     return i;
                 }

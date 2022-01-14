@@ -8,17 +8,17 @@ namespace Forest
     {
         public int fieldID;
         public Plot[] plots = { };
-        public GameObject inactiveSmoke;
+        // public GameObject inactiveSmoke;
 
-        public void Awake()
-        {
-            //not working atm!
-            if (fieldID > 0)
-            {
-                inactiveSmoke.SetActive(true);
-                inactiveSmoke.GetComponent<ParticleSystem>().Play();
-            }
-        }
+        // public void Awake()
+        // {
+        //     //not working atm!
+        //     if (fieldID > 0)
+        //     {
+        //         inactiveSmoke.SetActive(true);
+        //         inactiveSmoke.GetComponent<ParticleSystem>().Play();
+        //     }
+        // }
         
     }
     

@@ -9,6 +9,7 @@ namespace Inventory
         public List<InventoryItem> Inventory { get; private set; }
 
         public List<InventoryItemData> startSeeds;
+
         private void Awake()
         {
             Inventory = new List<InventoryItem>();
@@ -17,6 +18,22 @@ namespace Inventory
             {
                 this.Add(seed);
             }
+        }
+
+        public int Find(string itemName)
+        {
+            int i = 0;
+            foreach (var item in Inventory)
+            {
+                if (item.Data.displayName == itemName)
+                {
+                    return i;
+                }
+
+                i++;
+            }
+
+            return -1;
         }
         
 

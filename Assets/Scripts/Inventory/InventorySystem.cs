@@ -22,8 +22,30 @@ namespace Inventory
                         this.Add(seed);
                     }
                 }
-                this.Add(seed);
+                else
+                {
+                    for (var i = 0; i < 200; i++)
+                    {
+                        this.Add(seed);
+                    }
+                }
             }
+        }
+
+        public int Find(string name)
+        {
+            int i = 0;
+            foreach (var item in Inventory)
+            {
+                if (item.Data.displayName == name)
+                {
+                    return i;
+                }
+
+                i++;
+            }
+
+            return -1;
         }
         
 

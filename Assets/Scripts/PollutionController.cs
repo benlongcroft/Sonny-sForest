@@ -79,10 +79,19 @@ namespace Scripts
                 }
             }
 
-            _currentEfficiency = totalEfficiency / totalTreeCount;
+            if (totalTreeCount != 0)
+            {
+                _currentEfficiency = totalEfficiency / totalTreeCount;
+            }
+            else
+            {
+                _currentEfficiency = 0;
+            }
+            
             _currentTreeCount = totalTreeCount;
-
-            Debug.Log("Finished  efficiency count at timestamp : " + Time.time);
+            
+            Debug.Log("Finished  efficiency count at timestamp : " + Time.time 
+            + " e=" + _currentEfficiency + " treeCount=" + _currentTreeCount);
         }
     }
     

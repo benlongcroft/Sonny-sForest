@@ -7,31 +7,43 @@ namespace Main
     {
         public static PollutionBar Instance { get; private set; }
         public Image mask;
-
-        private int _pollution = 100;
+        
+        public GameObject loseScreen;
+        public ParticleSystem FactoryClouds;
+        private int _pollution = 0;
 
         private float _originalSize;
         // Start is called before the first frame update
         void Awake()
         {
             Instance = this;
-        }
-
-        // Update is called once per frame
-        void Start()
-        {
             _originalSize = mask.rectTransform.rect.width;
         }
-
-        public void PlantTree()
+        
+        public void SetPollution(float pollution)
         {
-            _pollution = _pollution - 1;
-            SetValue(_pollution/100f);
+            Debug.Log("P="+pollution/200f);
+            if (pollution < 200)
+            {
+                var rot = pollution*0.7f;
+                float rod = pollution/10;
+                var emission = FactoryClouds.emission;
+                emission.rateOverTime = rot;
+                emission.rateOverDistance = rod;
+                SetValue(pollution/200f);
+            }
+            else
+            {
+                if (pollution > 1)
+                {
+                    loseScreen.SetActive(true);
+                }
+            }
         }
     
-        void SetValue(float value)
+        private void SetValue(float value)
         {
-            mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _originalSize * value);
+            mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (_originalSize * value));
         }
     }
 }

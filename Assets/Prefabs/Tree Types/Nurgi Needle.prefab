@@ -104,7 +104,7 @@ MonoBehaviour:
   diseaseResistance: 22
   treeType: Nurgi Needle
   active: 0
-  efficiency: 0.41
+  efficiency: 0.75
   seedItem: {fileID: 11400000, guid: 100689ad2dc464e09a55a32d0d9bc37e, type: 2}
   seedSprite: {fileID: 21300000, guid: 4a5988009810d93428d2ccc938a4a37a, type: 3}
   seedlingSprite: {fileID: 21300000, guid: 80e441bc917d71d47b44b506cb8b7ec8, type: 3}

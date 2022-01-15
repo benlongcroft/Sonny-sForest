@@ -99,7 +99,7 @@ MonoBehaviour:
   stage: seed
   hardiness: 72
   pollutionThreshold: 90
-  lifespan: 73
+  lifespan: 195
   seedGrowthTime: 2
   diseaseResistance: 15
   treeType: Ackerieva Apple

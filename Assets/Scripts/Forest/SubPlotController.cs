@@ -80,10 +80,7 @@ namespace Forest
         public void SetTreeEmpty()
         {
             treeController.efficiency = 0;
-            treeController.hardiness = 0;
             treeController.lifespan = 0;
-            treeController.diseaseResistance = 0;
-            treeController.pollutionThreshold = 0;
             treeController.seedGrowthTime = 0;
             treeController.treeType = null;
             
@@ -104,11 +101,8 @@ namespace Forest
         public void SetTree(TreeController t, int[] loc)
         {
             treeController.efficiency = t.efficiency;
-            treeController.hardiness = t.hardiness;
             treeController.lifespan = t.lifespan;
-            treeController.diseaseResistance = t.diseaseResistance;
-            treeController.pollutionThreshold = t.pollutionThreshold;
-            treeController.seedGrowthTime = (int) (treeController.lifespan * 0.7f / 5);
+            treeController.seedGrowthTime = (int) (treeController.lifespan * 0.7f / 8);
             treeController.treeType = t.treeType;
 
             treeController.seedSprite = t.seedSprite;

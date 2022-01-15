@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Forest;
 using Main;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts
+namespace Main
 {
     public class PollutionController : MonoBehaviour
     {
@@ -15,6 +16,7 @@ namespace Scripts
         private float _currentEfficiency = 0;
         private int _currentTreeCount = 0;
         private DateTime _forestGenerationTime = DateTime.Now;
+        private PollutionBar pbar = PollutionBar.Instance;
     
         // Start is called before the first frame update
         void Start()
@@ -39,19 +41,14 @@ namespace Scripts
                
                // calculate pollution count using formula created by Ben 
                _pollutionCount = ((float) timeSinceCreation.TotalSeconds) * 
-                   ((1 + .4f * unlockedFieldCount) - (_currentTreeCount / 24) * _currentEfficiency) + 10;
-               Debug.Log("Finished pollution generation at timestamp : " + Time.time 
-                                                                      + " e=" + _currentEfficiency 
-                                                                      + " treeCount=" + _currentTreeCount
-                                                                      + " unlockedFields=" + unlockedFieldCount);
+                   ((1f + (0.5f * unlockedFieldCount)) - (_currentTreeCount / 15) * _currentEfficiency) + 10;
+               PollutionBar.Instance.SetPollution(_pollutionCount);
             }
             
             yield return new WaitForSeconds(1);
-            
             _generatorTickStarted = false;
             StartCoroutine(GeneratorTick());
             
-            Debug.Log("Pollution=" + _pollutionCount);
         }
         
         private int CalculateUnlockedFieldCount()
@@ -66,16 +63,19 @@ namespace Scripts
                 }
             }
 
-            return availFieldCount;
+            return availFieldCount-1;
         }
         
         private void SetEfficiencyAndTreeCount()
         {
             int totalTreeCount = 0;
             float totalEfficiency = 0;
-            
-            Debug.Log("Start efficiency count at timestamp : " + Time.time);
-            
+            Dictionary<string, float> eMult = new Dictionary<string, float>() { {"seed", 0f},
+                                                                                {"seedling", 0.2f}, 
+                                                                                {"sapling", 0.5f},
+                                                                                {"tree", 0.8f},
+                                                                                {"ancient", 1f}};
+
             foreach (Field indivField in _currentForest)
             {
                 foreach (Plot indivPlot in indivField.plots)
@@ -85,7 +85,7 @@ namespace Scripts
                         if (indivSpc.seeded && !indivSpc.dead)
                         {
                             totalTreeCount++;
-                            totalEfficiency += indivSpc.treeController.efficiency;
+                            totalEfficiency += indivSpc.treeController.efficiency * eMult[indivSpc.treeController.stage];
                         }
                     }
                 }

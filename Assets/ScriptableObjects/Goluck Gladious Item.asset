@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 002
   displayName: Golucki Gladious
+  exchangeValue: 0.5
   prefab: {fileID: 8012629638080816123, guid: 5d42febf3c7364409bdfe607739439bc, type: 3}

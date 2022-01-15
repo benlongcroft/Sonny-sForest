@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Forest\SubPlotController.cs" />
      <Compile Include="Assets\Scripts\LoadOut.cs" />
      <Compile Include="Assets\Scripts\PollutionController.cs" />
+     <Compile Include="Assets\Beautiful Progress Bar Free - CYKO\Scripts\SliderScripts.cs" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.24f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

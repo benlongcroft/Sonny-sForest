@@ -46,6 +46,7 @@ namespace Main
         {
             balanceText.text = (balance + amount).ToString();
             balance = (int) (balance + amount);
+            LoadOut.Instance.SetBalance(balance);
             if (amount < 0)
             {
                 for (var _ = amount; _ < 0; _++)
@@ -68,6 +69,7 @@ namespace Main
             var amount = GETMoneyStack();
             balanceText.text = (balance + amount).ToString();
             balance = balance + amount;
+            LoadOut.Instance.SetBalance(balance);
 
             var fields = GETFieldCount();
             fieldCost.text = FieldCosts[fields].ToString();

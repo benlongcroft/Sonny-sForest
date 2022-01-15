@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 003
   displayName: Ackerieva Apple
+  exchangeValue: 0.5
   prefab: {fileID: 7803650447790728960, guid: 5993f040883a64a04ba2050e19a3163b, type: 3}

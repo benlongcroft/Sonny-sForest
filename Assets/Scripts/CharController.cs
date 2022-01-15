@@ -8,7 +8,7 @@ namespace Main
     public class CharController : MonoBehaviour
     {
         public InventorySystem myInventory;
-        private int _inventorySelected = 0;
+        private int _inventorySelected = 1;
         private GameObject _loadout;
         private Rigidbody2D _rigidbody2d;
         public Field[] myForest = { };
@@ -104,7 +104,7 @@ namespace Main
                 }
                 else
                 {
-                    _inventorySelected = 0;
+                    _inventorySelected = 1;
                 }
                 ChangeLoadOut();
             }
@@ -148,6 +148,7 @@ namespace Main
                         item.AddToStack();
                     }
                 }
+                LoadOut.Instance.SetBalance(myInventory.Inventory[0].StackSize);
             }
             
             if (Input.GetKeyDown(KeyCode.C))

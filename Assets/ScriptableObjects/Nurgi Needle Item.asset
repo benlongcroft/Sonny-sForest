@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 001
   displayName: Nurgi Needle
+  exchangeValue: 0.4
   prefab: {fileID: 3821657156714344472, guid: 715b611f6ce644712935c76f40247251, type: 3}

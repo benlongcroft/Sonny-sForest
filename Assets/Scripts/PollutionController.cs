@@ -9,9 +9,6 @@ namespace Scripts
 {
     public class PollutionController : MonoBehaviour
     {
-        [SerializeField]
-        private Text _pollutionDisplayText;
-        
         private float _pollutionCount = 0;
         private bool _generatorTickStarted = false;
         private Field[] _currentForest;
@@ -22,7 +19,6 @@ namespace Scripts
         // Start is called before the first frame update
         void Start()
         {
-            _pollutionDisplayText = GetComponentInChildren<Text>();
             _currentForest = GameObject.Find("char").GetComponent<CharController>().myForest;
             StartCoroutine(GeneratorTick());
         }
@@ -30,7 +26,6 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            _pollutionDisplayText.text = _pollutionCount.ToString();
         }
         
         private IEnumerator GeneratorTick()
@@ -42,7 +37,8 @@ namespace Scripts
                TimeSpan timeSinceCreation = DateTime.Now - _forestGenerationTime;
 
                // calculate pollution count using formula created by Ben 
-               _pollutionCount = ((float) timeSinceCreation.TotalHours) * (1 - _currentEfficiency) + 10;
+               _pollutionCount = ((float) timeSinceCreation.TotalSeconds) * 
+                   (1 - (_currentTreeCount / 24) * _currentEfficiency) + 10;
             }
 
             //Print the time of when the function is first called.
@@ -55,6 +51,8 @@ namespace Scripts
             //After we have waited 1 second print the time again.
             Debug.Log("Finished Coroutine at timestamp : " + Time.time);
             StartCoroutine(GeneratorTick());
+            
+            Debug.Log("Pollution=" + _pollutionCount);
         }
         
         private void SetEfficiencyAndTreeCount()
@@ -70,10 +68,10 @@ namespace Scripts
                 {
                     foreach (SubPlotController indivSpc in indivPlot.subPlots)
                     {
-                        if (indivSpc.treeController.active)
+                        if (indivSpc.seeded && !indivSpc.dead)
                         {
                             totalTreeCount++;
-                            totalEfficiency = indivSpc.treeController.efficiency;
+                            totalEfficiency += indivSpc.treeController.efficiency;
                         }
                     }
                 }

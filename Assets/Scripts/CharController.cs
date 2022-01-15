@@ -45,13 +45,9 @@ namespace Main
             if (_inventorySelected != myInventory.Inventory.Count)
             {
                 var item = myInventory.Inventory[_inventorySelected];
-                if (item.Data.displayName == "Money")
+                SetLoadOut(item);
+                if (item.Data.displayName != "Money")
                 {
-                    SetLoadOut(item);
-                }
-                else
-                {
-                    SetLoadOut(item);
                     Destroy(_loadout);
                     _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
                     _loadout.name = "loadout";

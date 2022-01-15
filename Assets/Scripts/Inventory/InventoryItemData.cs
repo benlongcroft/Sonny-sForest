@@ -7,6 +7,7 @@ namespace Inventory
     {
         public string id;
         public string displayName;
+        public float exchangeValue;
         public GameObject prefab;
 
         public Sprite GetSpriteIcon()

@@ -12,6 +12,8 @@ namespace Main
         public Text quantityLabel;
 
         public Text itemLabel;
+
+        public Text BalanceText;
         // Start is called before the first frame update
         void Awake()
         {
@@ -37,6 +39,11 @@ namespace Main
         public void SetItemName(string name)
         {
             itemLabel.text = name;
+        }
+
+        public void SetBalance(int balance)
+        {
+            BalanceText.text = balance.ToString();
         }
     }
 }

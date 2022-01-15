@@ -55,11 +55,11 @@ namespace Inventory
         {
             if (!_itemDictionary.TryGetValue(referenceData, out var value)) return;
             value.RemoveFromStack();
-            if (value.StackSize == 0)
-            {
-                Inventory.Remove(value);
-                _itemDictionary.Remove(referenceData);
-            }
+            // if (value.StackSize == 0)
+            // {
+            //     Inventory.Remove(value);
+            //     _itemDictionary.Remove(referenceData);
+            // }
         }
     }
 }

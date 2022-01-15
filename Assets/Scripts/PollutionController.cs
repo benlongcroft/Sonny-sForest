@@ -35,24 +35,38 @@ namespace Scripts
                _generatorTickStarted = true;
                SetEfficiencyAndTreeCount();
                TimeSpan timeSinceCreation = DateTime.Now - _forestGenerationTime;
-
+               int unlockedFieldCount = CalculateUnlockedFieldCount();
+               
                // calculate pollution count using formula created by Ben 
                _pollutionCount = ((float) timeSinceCreation.TotalSeconds) * 
-                   (1 - (_currentTreeCount / 24) * _currentEfficiency) + 10;
+                   ((1 + .4f * unlockedFieldCount) - (_currentTreeCount / 24) * _currentEfficiency) + 10;
+               Debug.Log("Finished pollution generation at timestamp : " + Time.time 
+                                                                      + " e=" + _currentEfficiency 
+                                                                      + " treeCount=" + _currentTreeCount
+                                                                      + " unlockedFields=" + unlockedFieldCount);
             }
-
-            //Print the time of when the function is first called.
-            Debug.Log("Started Coroutine at timestamp : " + Time.time);
- 
-            //yield on a new YieldInstruction that waits for 1 second.
+            
             yield return new WaitForSeconds(1);
+            
             _generatorTickStarted = false;
-
-            //After we have waited 1 second print the time again.
-            Debug.Log("Finished Coroutine at timestamp : " + Time.time);
             StartCoroutine(GeneratorTick());
             
             Debug.Log("Pollution=" + _pollutionCount);
+        }
+        
+        private int CalculateUnlockedFieldCount()
+        {
+            int availFieldCount = 0;
+            
+            foreach (Field indivField in _currentForest)
+            {
+                if (indivField.unlocked)
+                {
+                    availFieldCount++;
+                }
+            }
+
+            return availFieldCount;
         }
         
         private void SetEfficiencyAndTreeCount()
@@ -87,9 +101,6 @@ namespace Scripts
             }
             
             _currentTreeCount = totalTreeCount;
-            
-            Debug.Log("Finished  efficiency count at timestamp : " + Time.time 
-            + " e=" + _currentEfficiency + " treeCount=" + _currentTreeCount);
         }
     }
     

@@ -77,6 +77,30 @@ namespace Forest
 
         }
 
+        public void SetTreeEmpty()
+        {
+            treeController.efficiency = 0;
+            treeController.hardiness = 0;
+            treeController.lifespan = 0;
+            treeController.diseaseResistance = 0;
+            treeController.pollutionThreshold = 0;
+            treeController.seedGrowthTime = 0;
+            treeController.treeType = null;
+            
+            treeController.seedSprite = null;
+            treeController.seedlingSprite = null;
+            treeController.saplingSprite = null;
+            treeController.treeSprite = null;
+            treeController.ancientSprite = null;
+            treeController.deadSprite = null;
+
+            treeController.location = null;
+            treeController.stage = null;
+            treeController.active = false;
+
+            treeController.seedItem = null;
+        }
+
         public void SetTree(TreeController t, int[] loc)
         {
             treeController.efficiency = t.efficiency;

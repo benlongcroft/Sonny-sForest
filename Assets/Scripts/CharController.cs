@@ -60,12 +60,12 @@ namespace Main
             }
             else
             {
-                makeLoadoutNull();
+                MakeLoadoutNull();
 
             }
         }
 
-        private void makeLoadoutNull()
+        private void MakeLoadoutNull()
         {
             _loadout = null;
             LoadOut.Instance.SetSprite(null);
@@ -120,7 +120,7 @@ namespace Main
                 var objHit = hit.collider.gameObject.GetComponent<Plot>();
                 if (_loadout == null) return;
                 var isSeed = _loadout.GetComponent<TreeController>();
-                if (isSeed != null)
+                if (isSeed != null && myInventory.Inventory[_inventorySelected].StackSize != 0)
                 {
                     var success = objHit.ChoosePlot(isSeed);
                     Debug.Log("PLOTID: "+objHit.plotID);
@@ -151,6 +151,18 @@ namespace Main
                     {
                         item.AddToStack();
                     }
+                }
+            }
+            
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                var hit = Physics2D.Raycast(_rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
+                if (hit.collider == null) return;
+                var objHit = hit.collider.gameObject.GetComponent<Plot>();
+                var success = objHit.ChopDownTree();
+                if (success == -1)
+                {
+                    Debug.Log("No Tree to chop!");
                 }
             }
         }

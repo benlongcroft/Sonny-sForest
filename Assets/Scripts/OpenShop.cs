@@ -18,9 +18,6 @@ namespace Main
         private readonly Dictionary<int, int> FieldCosts = new Dictionary<int, int>()
             {{0, 50}, {1, 100}, {2, 200}, {3, 300}, {4, 500}, {5, 600}, {6, 700}, {7, 800}};
 
-        private readonly Dictionary<int, float> ConversionRates = new Dictionary<int, float>()
-            {{000, 0.2f}, {001, 0.5f}, {002, 0.7f}, {003, 0.6f}, {004, 1}};
-
         private int balance = 0;
         public Text balanceText;
         public Text fieldCost;
@@ -121,12 +118,13 @@ namespace Main
             
             var id = int.Parse(myInventory.Inventory[index].Data.id);
             var maxQuantity = myInventory.Inventory[index].StackSize;
+            var exchangeRate = myInventory.Inventory[index].Data.exchangeValue;
             
             var amount = CheckQuantity();
 
             if (amount <= 0 || amount >= maxQuantity) return;
             
-            rate = (ConversionRates[id] * amount);
+            rate = (exchangeRate * amount);
             conversionValue.text = rate.ToString();
 
 
@@ -138,12 +136,13 @@ namespace Main
             if (index == 0) return;
             var id = int.Parse(myInventory.Inventory[index].Data.id);
             var maxQuantity = myInventory.Inventory[index].StackSize;
+            var exchangeRate = myInventory.Inventory[index].Data.exchangeValue;
             
             var amount = CheckQuantity();
             
             if (amount <= 0 || amount >= maxQuantity) return;
             
-            var coinsGained = (ConversionRates[id] * amount);
+            var coinsGained = (exchangeRate * amount);
             conversionValue.text = coinsGained.ToString();
 
             for (var x = 0; x < amount; x++)

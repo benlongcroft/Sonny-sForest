@@ -97,14 +97,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   location: 000000000000000000000000
   stage: seed
-  hardiness: 72
-  pollutionThreshold: 90
-  lifespan: 195
+  lifespan: 315
   seedGrowthTime: 2
-  diseaseResistance: 15
   treeType: Ackerieva Apple
   active: 0
-  efficiency: 0.8
+  efficiency: 0.5
   seedItem: {fileID: 11400000, guid: b94b99c25a77d440081137d129b001f8, type: 2}
   seedSprite: {fileID: 21300000, guid: cb760c5817b1ff54889eb98c9e8c023d, type: 3}
   seedlingSprite: {fileID: 21300000, guid: b134604dda3855c429d12606b6f90655, type: 3}

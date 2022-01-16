@@ -11,6 +11,11 @@ namespace Main
     public class PollutionController : MonoBehaviour
     {
         private float _pollutionCount = 0;
+        private float _previousPollution = 10;
+        float totalEfficiency = 0f;
+        private int treeCount = 0;
+        private int previousTreeCount = 0;
+        
         private bool _generatorTickStarted = false;
         private Field[] _currentForest;
         private float _currentEfficiency = 0;
@@ -37,12 +42,22 @@ namespace Main
                _generatorTickStarted = true;
                SetEfficiencyAndTreeCount();
                TimeSpan timeSinceCreation = DateTime.Now - _forestGenerationTime;
-               int unlockedFieldCount = CalculateUnlockedFieldCount();
+               var unlockedFieldCount = CalculateUnlockedFieldCount();
                
+               var f = 1.0f + (0.05f * (unlockedFieldCount - 1));
+               var t = totalEfficiency / (22 * unlockedFieldCount);
                // calculate pollution count using formula created by Ben 
-               _pollutionCount = ((float) timeSinceCreation.TotalSeconds) * 
-                   ((1f + (0.5f * unlockedFieldCount)) - (_currentTreeCount / 15) * _currentEfficiency) + 10;
+               _pollutionCount = _previousPollution + (f - t);
                PollutionBar.Instance.SetPollution(_pollutionCount);
+               Debug.Log("P="+_pollutionCount+" E="+totalEfficiency+" PP="+_previousPollution);
+               if (_pollutionCount < 0)
+               {
+                   _previousPollution = 0;
+               }
+               else
+               {
+                   _previousPollution = _pollutionCount;
+               }
             }
             
             yield return new WaitForSeconds(1);
@@ -63,18 +78,21 @@ namespace Main
                 }
             }
 
-            return availFieldCount-1;
+            return availFieldCount;
         }
-        
+
         private void SetEfficiencyAndTreeCount()
         {
-            int totalTreeCount = 0;
-            float totalEfficiency = 0;
-            Dictionary<string, float> eMult = new Dictionary<string, float>() { {"seed", 0f},
-                                                                                {"seedling", 0.2f}, 
-                                                                                {"sapling", 0.5f},
-                                                                                {"tree", 0.8f},
-                                                                                {"ancient", 1f}};
+            treeCount = 0;
+            totalEfficiency = 0;
+            Dictionary<string, float> eMult = new Dictionary<string, float>()
+            {
+                {"seed", 0f},
+                {"seedling", 0.6f},
+                {"sapling", 0.7f},
+                {"tree", 0.9f},
+                {"ancient", 1f}
+            };
 
             foreach (Field indivField in _currentForest)
             {
@@ -84,24 +102,38 @@ namespace Main
                     {
                         if (indivSpc.seeded && !indivSpc.dead)
                         {
-                            totalTreeCount++;
-                            totalEfficiency += indivSpc.treeController.efficiency * eMult[indivSpc.treeController.stage];
+                            totalEfficiency += indivSpc.treeController.efficiency *
+                                               eMult[indivSpc.treeController.stage];
+                            treeCount++;
                         }
                     }
                 }
             }
 
-            if (totalTreeCount != 0)
+            if (previousTreeCount < treeCount)
             {
-                _currentEfficiency = totalEfficiency / totalTreeCount;
+                for (var _ = 0; _ < (treeCount - previousTreeCount); _++)
+                {
+                    if (_previousPollution > 1 && _pollutionCount > 1)
+                    {
+                        _previousPollution-=0.8f;
+                    }
+                }
             }
-            else
-            {
-                _currentEfficiency = 0;
-            }
-            
-            _currentTreeCount = totalTreeCount;
+
+            previousTreeCount = treeCount;
         }
+        //     if (totalTreeCount != 0)
+        //     {
+        //         _currentEfficiency = totalEfficiency / totalTreeCount;
+        //     }
+        //     else
+        //     {
+        //         _currentEfficiency = 0;
+        //     }
+        //     
+        //     _currentTreeCount = totalTreeCount;
+        // }
     }
     
 }

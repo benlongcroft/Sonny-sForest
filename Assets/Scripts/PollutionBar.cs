@@ -22,14 +22,16 @@ namespace Main
         
         public void SetPollution(float pollution)
         {
-            Debug.Log("P="+pollution/200f);
+            // Debug.Log("P="+pollution+"/200");
             if (pollution < 200)
             {
-                var rot = pollution*0.7f;
+                var rot = pollution*0.5f;
                 float rod = pollution/10;
+                
                 var emission = FactoryClouds.emission;
                 emission.rateOverTime = rot;
                 emission.rateOverDistance = rod;
+                
                 SetValue(pollution/200f);
             }
             else
@@ -38,6 +40,7 @@ namespace Main
                 {
                     loseScreen.SetActive(true);
                 }
+                SetValue(1/200f);
             }
         }
     

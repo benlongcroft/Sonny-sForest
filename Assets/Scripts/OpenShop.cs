@@ -144,7 +144,7 @@ namespace Main
             
             if (amount <= 0 || amount >= maxQuantity) return;
             
-            var coinsGained = (exchangeRate * amount);
+            var coinsGained = (int) (exchangeRate * amount);
             conversionValue.text = coinsGained.ToString();
 
             for (var x = 0; x < amount; x++)

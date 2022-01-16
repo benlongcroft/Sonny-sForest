@@ -42,7 +42,7 @@ namespace Forest
             if (seeded && !dead)
             { 
                 timer = timer + Time.deltaTime;
-                float g = GrowTime();
+                float g = GrowTime() + (new Random().Next(-5, 5));
                 // Debug.Log((timer - lastTimer)+"/"+g);
                 if (timer - lastTimer >= g)
                 {

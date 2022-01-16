@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 namespace Inventory
@@ -9,17 +11,44 @@ namespace Inventory
         public List<InventoryItem> Inventory { get; private set; }
 
         public List<InventoryItemData> startSeeds;
+        
+        private void AddN(int n, InventoryItemData x)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                this.Add(x);
+            }
+        }
 
+        
         private void Awake()
         {
             Inventory = new List<InventoryItem>();
             _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
-            foreach (var seed in startSeeds)
+            foreach (var item in startSeeds)
             {
-                this.Add(seed);
-            }
+                switch (item.displayName)
+                {
+                    case "Money":
+                        AddN(10, item);
+                        break;
+                    case "Ackerieva Apple":
+                        AddN(2, item);
+                        break;
+                    case "Fovir Fir":
+                        AddN(5, item);
+                        break;
+                    case "Golucki Gladious":
+                        AddN(1, item);
+                        break;
+                    case "Nurgi Needle":
+                        AddN(5, item);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(item.displayName));
+                }
+            }    
         }
-
         public int Find(string itemName)
         {
             int i = 0;

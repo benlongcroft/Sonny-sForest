@@ -3,32 +3,35 @@ using UnityEngine.UI;
 
 namespace Main
 {
+    /*
+     * Pollution Bar and Smoke Controller
+     */
     public class PollutionBar : MonoBehaviour
     {
         public static PollutionBar Instance { get; private set; }
         public Image mask;
         
         public GameObject loseScreen;
-        public ParticleSystem FactoryClouds;
-        private int _pollution = 0;
+        public ParticleSystem factoryClouds;
+        private int m_Pollution = 0;
 
-        private float _originalSize;
+        private float m_OriginalSize;
         // Start is called before the first frame update
         void Awake()
         {
             Instance = this;
-            _originalSize = mask.rectTransform.rect.width;
+            m_OriginalSize = mask.rectTransform.rect.width;
         }
         
         public void SetPollution(float pollution)
+        //Sets Pollution level on factory clouds and bar
         {
-            // Debug.Log("P="+pollution+"/200");
             if (pollution < 200)
             {
                 var rot = pollution*0.5f;
                 float rod = pollution/10;
                 
-                var emission = FactoryClouds.emission;
+                var emission = factoryClouds.emission;
                 emission.rateOverTime = rot;
                 emission.rateOverDistance = rod;
                 
@@ -46,7 +49,8 @@ namespace Main
     
         private void SetValue(float value)
         {
-            mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (_originalSize * value));
+            //sets value of bar
+            mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (m_OriginalSize * value));
         }
     }
 }

@@ -5,15 +5,18 @@ namespace Main
 {
     public class LoadOut : MonoBehaviour
     {
+        /*
+         * User Loadout class
+         */
         public static LoadOut Instance { get; private set; }
 
-        private Image _img = null;
+        private Image m_Img = null;
 
         public Text quantityLabel;
 
         public Text itemLabel;
 
-        public Text BalanceText;
+        public Text balanceText;
         // Start is called before the first frame update
         void Awake()
         {
@@ -22,13 +25,13 @@ namespace Main
 
         void Start()
         {
-            _img = Instance.GetComponent<Image>();
+            m_Img = Instance.GetComponent<Image>();
         }
 
         // Update is called once per frame
         public void SetSprite(Sprite newSprite)
         {
-            _img.sprite = newSprite;
+            m_Img.sprite = newSprite;
         }
 
         public void SetQuantity(int quantity)
@@ -43,7 +46,7 @@ namespace Main
 
         public void SetBalance(int balance)
         {
-            BalanceText.text = balance.ToString();
+            balanceText.text = balance.ToString();
         }
     }
 }

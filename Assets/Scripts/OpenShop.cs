@@ -9,16 +9,19 @@ using UnityEngine.UI;
 
 namespace Main
 {
+    /*
+     * Shop Controller class
+     */
     public class OpenShop : MonoBehaviour
     {
         public GameObject panel;
         public InventorySystem myInventory;
         public Field[] myForest;
 
-        private readonly Dictionary<int, int> FieldCosts = new Dictionary<int, int>()
+        private readonly Dictionary<int, int> m_FieldCosts = new Dictionary<int, int>()
             {{0, 50}, {1, 100}, {2, 200}, {3, 300}, {4, 500}, {5, 600}, {6, 700}, {7, 800}};
 
-        private int balance = 0;
+        private int m_Balance = 0;
         public Text balanceText;
         public Text fieldCost;
         public Text conversionValue;
@@ -34,7 +37,7 @@ namespace Main
 
         private int GETFieldCount()
         {
-            return myForest.Count(field => field.unlocked);
+            return myForest.Count(field => field.Unlocked);
         }
 
         private int GETMoneyStack()
@@ -44,9 +47,10 @@ namespace Main
 
         private void ChangeBalance(float amount)
         {
-            balanceText.text = (balance + amount).ToString();
-            balance = (int) (balance + amount);
-            LoadOut.Instance.SetBalance(balance);
+            // Change balance of Rune Coins
+            balanceText.text = (m_Balance + amount).ToString();
+            m_Balance = (int) (m_Balance + amount);
+            LoadOut.Instance.SetBalance(m_Balance);
             if (amount < 0)
             {
                 for (var _ = amount; _ < 0; _++)
@@ -61,35 +65,35 @@ namespace Main
                     myInventory.Inventory[0].AddToStack();
                 }
             }
-            // CharController.SetLoadOut(myInventory.Inventory[0]);
         }
 
-        private void Awake()
+        private void Start()
         {
             var amount = GETMoneyStack();
-            balanceText.text = (balance + amount).ToString();
-            balance = balance + amount;
-            LoadOut.Instance.SetBalance(balance);
+            balanceText.text = (m_Balance + amount).ToString();
+            m_Balance = m_Balance + amount;
+            LoadOut.Instance.SetBalance(m_Balance);
 
             var fields = GETFieldCount();
-            fieldCost.text = FieldCosts[fields].ToString();
+            fieldCost.text = m_FieldCosts[fields].ToString();
         }
 
         private void Update()
         {
-            balance = myInventory.Inventory[0].StackSize;
-            balanceText.text = balance.ToString();
+            m_Balance = myInventory.Inventory[0].StackSize;
+            balanceText.text = m_Balance.ToString();
         }
 
         public void BuyField()
         {
+            //Buy a new field
             var nFields = GETFieldCount()-1;
-            balance = myInventory.Inventory[0].StackSize;
-            if (balance >= FieldCosts[nFields])
+            m_Balance = myInventory.Inventory[0].StackSize;
+            if (m_Balance >= m_FieldCosts[nFields])
             {
-                ChangeBalance(-1*FieldCosts[nFields]);
+                ChangeBalance(-1*m_FieldCosts[nFields]);
                 myForest[nFields+1].SetActive();
-                fieldCost.text = FieldCosts[GETFieldCount()-1].ToString();
+                fieldCost.text = m_FieldCosts[GETFieldCount()-1].ToString();
             }
         }
 
@@ -115,6 +119,7 @@ namespace Main
 
         private void Value()
         {
+            //Get Value of seed conversion
             float rate = 0;
             var index = GETLoadOutIndex();
             
@@ -134,6 +139,7 @@ namespace Main
 
         public void Convert()
         {
+            //Convert seeds to coins
             var index = GETLoadOutIndex();
             if (index == 0) return;
             var id = int.Parse(myInventory.Inventory[index].Data.id);

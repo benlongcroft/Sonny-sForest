@@ -1,15 +1,18 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Forest
 {
     public class Field : MonoBehaviour
     {
+        /*
+         * Field is a class that contains all subplots,
+         * applies smoke particle system when locked
+         * Can be unlocked in shop.
+         */
         public int fieldID;
         public Plot[] plots = { };
         public GameObject smoke;
-        public bool unlocked { private set; get; }
+        public bool Unlocked { private set; get; }
         public void Awake()
         {
             if (fieldID > 0)
@@ -23,6 +26,9 @@ namespace Forest
         }
 
         public void SetActive()
+        /*
+         * Sets a field as Active and ready to be planted in
+         */
         {
             foreach (var p in plots)
             {
@@ -35,10 +41,14 @@ namespace Forest
                 s.Stop();
             }
 
-            unlocked = true;
+            Unlocked = true;
         }
         
         public void SetNotActive()
+        /*
+         * Sets a fields as Locked and covers it with smoke particle system.
+         * It blocks movement to this field from Sonny.
+         */
         {
             foreach (var p in plots)
             {
@@ -50,7 +60,7 @@ namespace Forest
                 }
             }
 
-            unlocked = false;
+            Unlocked = false;
         }
     }
 

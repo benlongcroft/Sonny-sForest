@@ -8,50 +8,59 @@ namespace Main
     public class CharController : MonoBehaviour
     {
         public InventorySystem myInventory;
-        private int _inventorySelected = 1;
-        private GameObject _loadout;
-        private Rigidbody2D _rigidbody2d;
+        private int m_InventorySelected = 1;
+        private GameObject m_Loadout;
+        private Rigidbody2D m_Rigidbody2d;
         public Field[] myForest = { };
         Animator m_Animator;
 
-        private Vector2 lookDirection = new Vector2(0,0);
+        private Vector2 m_LookDirection = new Vector2(0,0);
         public float speed = 1.8f;
         private static readonly int MoveX = Animator.StringToHash("MoveX");
         private static readonly int MoveY = Animator.StringToHash("MoveY");
         private static readonly int Speed = Animator.StringToHash("Speed");
 
         private void CheckNewSeeds()
+        /*
+         * Check to see if any new seeds have been dropped 
+         */
         {
             if (myInventory.Inventory.Count == 0)
             {
-                _inventorySelected += 1;
-                SetLoadOut(myInventory.Inventory[_inventorySelected]);
+                m_InventorySelected += 1;
+                SetLoadOut(myInventory.Inventory[m_InventorySelected]);
             }
             else
             {
-                LoadOut.Instance.SetQuantity(myInventory.Inventory[_inventorySelected].StackSize); 
+                LoadOut.Instance.SetQuantity(myInventory.Inventory[m_InventorySelected].StackSize); 
             }
         }
 
         public static void SetLoadOut(InventoryItem item)
         {
+            /*
+             * Set LoadOut to most current inventory
+             */
             LoadOut.Instance.SetSprite(item.Data.GetSpriteIcon());
             LoadOut.Instance.SetQuantity(item.StackSize);
             LoadOut.Instance.SetItemName(item.Data.displayName);
         }
         
         private void ChangeLoadOut()
+        /*
+         * Change the loadout with tab
+         */
         {
-            if (_inventorySelected != myInventory.Inventory.Count)
+            if (m_InventorySelected != myInventory.Inventory.Count)
             {
-                var item = myInventory.Inventory[_inventorySelected];
+                var item = myInventory.Inventory[m_InventorySelected];
                 SetLoadOut(item);
                 if (item.Data.displayName != "Money")
                 {
-                    Destroy(_loadout);
-                    _loadout = Instantiate(myInventory.Inventory[_inventorySelected].Data.prefab);
-                    _loadout.name = "loadout";
-                    _loadout.SetActive(false);   
+                    Destroy(m_Loadout);
+                    m_Loadout = Instantiate(myInventory.Inventory[m_InventorySelected].Data.prefab);
+                    m_Loadout.name = "loadout";
+                    m_Loadout.SetActive(false);   
                 }
             }
             else
@@ -63,19 +72,20 @@ namespace Main
 
         private void MakeLoadoutNull()
         {
-            _loadout = null;
+            m_Loadout = null;
             LoadOut.Instance.SetSprite(null);
             LoadOut.Instance.SetQuantity(0);
             LoadOut.Instance.SetItemName("Empty");
-            _inventorySelected = -1;
+            m_InventorySelected = -1;
         }
     
         // Start is called before the first frame update
         void Start()
         {
+            Application.targetFrameRate = -1;
             var cwd = System.IO.Directory.GetCurrentDirectory();
             // myForest = GSOController.ReadForest(cwd, myForest);
-            _rigidbody2d = GetComponent<Rigidbody2D>();
+            m_Rigidbody2d = GetComponent<Rigidbody2D>();
             m_Animator = GetComponent<Animator>();
             ChangeLoadOut();
         }
@@ -83,40 +93,45 @@ namespace Main
         // Update is called once per frame
         void Update()
         {
+            //move Sonny
             Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
             {
-                lookDirection.Set(move.x, move.y);
-                lookDirection.Normalize();
+                m_LookDirection.Set(move.x, move.y);
+                m_LookDirection.Normalize();
             }
             
             
-            m_Animator.SetFloat(MoveX, lookDirection.x);
-            m_Animator.SetFloat(MoveY, lookDirection.y);
+            //animator movement settings
+            m_Animator.SetFloat(MoveX, m_LookDirection.x);
+            m_Animator.SetFloat(MoveY, m_LookDirection.y);
             m_Animator.SetFloat(Speed, move.magnitude);
             // m_Animator.SetFloat("Speed", move.magnitude);
-
+            
+            //Change Inventory
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (_inventorySelected+1 != myInventory.Inventory.Count)
+                if (m_InventorySelected+1 != myInventory.Inventory.Count)
                 {
-                    _inventorySelected += 1;
+                    m_InventorySelected += 1;
                 }
                 else
                 {
-                    _inventorySelected = 1;
+                    m_InventorySelected = 1;
                 }
                 ChangeLoadOut();
             }
-
+            
+            
+            //Plant loadout
             if(Input.GetKeyDown(KeyCode.P))
             {
-                var hit = Physics2D.Raycast(_rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
+                var hit = Physics2D.Raycast(m_Rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
                 if (hit.collider == null) return;
                 var objHit = hit.collider.gameObject.GetComponent<Plot>();
-                if (_loadout == null) return;
-                var isSeed = _loadout.GetComponent<TreeController>();
-                if (isSeed != null && myInventory.Inventory[_inventorySelected].StackSize != 0)
+                if (m_Loadout == null) return;
+                var isSeed = m_Loadout.GetComponent<TreeController>();
+                if (isSeed != null && myInventory.Inventory[m_InventorySelected].StackSize != 0)
                 {
                     var success = objHit.ChoosePlot(isSeed);
                     Debug.Log("PLOTID: "+objHit.plotID);
@@ -126,7 +141,7 @@ namespace Main
                     }
                     else
                     {
-                        myInventory.Inventory[_inventorySelected].RemoveFromStack();
+                        myInventory.Inventory[m_InventorySelected].RemoveFromStack();
                         ChangeLoadOut();
                     }
                 }
@@ -137,7 +152,8 @@ namespace Main
             }
             //must be continually checked to see if seeds have been dropped
             CheckNewSeeds();
-
+            
+            //Cheat Code
             if (Input.GetKeyDown(KeyCode.C) && Input.GetKeyDown(KeyCode.M))
             {
                 //cheat code for God mode
@@ -151,9 +167,10 @@ namespace Main
                 LoadOut.Instance.SetBalance(myInventory.Inventory[0].StackSize);
             }
             
+            //Chop Down Tree
             if (Input.GetKeyDown(KeyCode.C))
             {
-                var hit = Physics2D.Raycast(_rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
+                var hit = Physics2D.Raycast(m_Rigidbody2d.position + Vector2.up * 0.2f, Vector2.zero, 1.5f, LayerMask.GetMask("plots"));
                 if (hit.collider == null) return;
                 var objHit = hit.collider.gameObject.GetComponent<Plot>();
                 var success = objHit.ChopDownTree();
@@ -168,10 +185,10 @@ namespace Main
         {
             var horizontal = Input.GetAxis("Horizontal");
             var vertical = Input.GetAxis("Vertical");
-            Vector2 position = _rigidbody2d.position;
+            Vector2 position = m_Rigidbody2d.position;
             position.x = position.x + speed * horizontal * Time.deltaTime;
             position.y = position.y + speed * vertical * Time.deltaTime;
-            _rigidbody2d.MovePosition(position);
+            m_Rigidbody2d.MovePosition(position);
         }
     }
 }

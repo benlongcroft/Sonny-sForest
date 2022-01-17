@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Forest
 {
+    /*
+     * The tree controller class that stores its properties
+     */
     [Serializable]
     public class TreeController : MonoBehaviour
     {
@@ -31,7 +34,9 @@ namespace Forest
 
         public Sprite SetSprite()
         {
-            Debug.Log("Sprite set is "+stage);
+            /*
+             * returns sprite from stage
+             */
             switch (stage)
             {
                 case "seed":

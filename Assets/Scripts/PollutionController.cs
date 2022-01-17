@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Forest;
 using Main;
 using UnityEngine;
@@ -8,120 +9,108 @@ using UnityEngine.UI;
 
 namespace Main
 {
+    /*
+     * Main Pollution calculator
+     */
     public class PollutionController : MonoBehaviour
     {
-        private float _pollutionCount = 0;
-        private float _previousPollution = 10;
-        float totalEfficiency = 0f;
-        private int treeCount = 0;
-        private int previousTreeCount = 0;
+        private float m_PollutionCount = 0;
+        private float m_PreviousPollution = 10;
+        float m_TotalEfficiency = 0f;
+        private int m_TreeCount = 0;
+        private int m_PreviousTreeCount = 0;
         
-        private bool _generatorTickStarted = false;
-        private Field[] _currentForest;
-        private float _currentEfficiency = 0;
-        private int _currentTreeCount = 0;
-        private DateTime _forestGenerationTime = DateTime.Now;
-        private PollutionBar pbar = PollutionBar.Instance;
-    
+        private bool m_GeneratorTickStarted = false;
+        private Field[] m_CurrentForest;
+
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            _currentForest = GameObject.Find("char").GetComponent<CharController>().myForest;
+            m_CurrentForest = GameObject.Find("char").GetComponent<CharController>().myForest;
+            //get forest
             StartCoroutine(GeneratorTick());
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-        }
-        
         private IEnumerator GeneratorTick()
+        //calculate new pollution value
         {
-            if (!_generatorTickStarted)
+            if (!m_GeneratorTickStarted)
             {
-               _generatorTickStarted = true;
+               m_GeneratorTickStarted = true;
                SetEfficiencyAndTreeCount();
-               TimeSpan timeSinceCreation = DateTime.Now - _forestGenerationTime;
                var unlockedFieldCount = CalculateUnlockedFieldCount();
                
+               //difficulty
                var f = 1.0f + (0.05f * (unlockedFieldCount - 1));
-               var t = totalEfficiency / (22 * unlockedFieldCount);
+               
+               //Field Score
+               var t = m_TotalEfficiency / (22 * unlockedFieldCount);
+               
                // calculate pollution count using formula created by Ben 
-               _pollutionCount = _previousPollution + (f - t);
-               PollutionBar.Instance.SetPollution(_pollutionCount);
-               Debug.Log("P="+_pollutionCount+" E="+totalEfficiency+" PP="+_previousPollution);
-               if (_pollutionCount < 0)
+               m_PollutionCount = m_PreviousPollution + (f - t);
+               
+               PollutionBar.Instance.SetPollution(m_PollutionCount);
+               
+               if (m_PollutionCount < 0)
                {
-                   _previousPollution = 0;
+                   m_PreviousPollution = 0;
                }
                else
                {
-                   _previousPollution = _pollutionCount;
+                   m_PreviousPollution = m_PollutionCount;
                }
             }
             
             yield return new WaitForSeconds(1);
-            _generatorTickStarted = false;
+            m_GeneratorTickStarted = false;
             StartCoroutine(GeneratorTick());
             
         }
         
         private int CalculateUnlockedFieldCount()
         {
-            int availFieldCount = 0;
-            
-            foreach (Field indivField in _currentForest)
-            {
-                if (indivField.unlocked)
-                {
-                    availFieldCount++;
-                }
-            }
-
-            return availFieldCount;
+            return m_CurrentForest.Count(indivField => indivField.Unlocked);
         }
 
         private void SetEfficiencyAndTreeCount()
         {
-            treeCount = 0;
-            totalEfficiency = 0;
+            m_TreeCount = 0;
+            m_TotalEfficiency = 0;
             Dictionary<string, float> eMult = new Dictionary<string, float>()
             {
                 {"seed", 0f},
                 {"seedling", 0.6f},
-                {"sapling", 0.7f},
+                {"sapling", 0.75f},
                 {"tree", 0.9f},
                 {"ancient", 1f}
             };
 
-            foreach (Field indivField in _currentForest)
+            foreach (var indivField in m_CurrentForest)
             {
-                foreach (Plot indivPlot in indivField.plots)
+                foreach (var indivPlot in indivField.plots)
                 {
-                    foreach (SubPlotController indivSpc in indivPlot.subPlots)
+                    foreach (var indivSpc in indivPlot.subPlots.Where(indivSpc => indivSpc.seeded && !indivSpc.dead))
                     {
-                        if (indivSpc.seeded && !indivSpc.dead)
-                        {
-                            totalEfficiency += indivSpc.treeController.efficiency *
-                                               eMult[indivSpc.treeController.stage];
-                            treeCount++;
-                        }
+                        m_TotalEfficiency += indivSpc.treeController.efficiency *
+                                             eMult[indivSpc.treeController.stage];
+                        m_TreeCount++;
                     }
                 }
             }
 
-            if (previousTreeCount < treeCount)
+            
+            //tree plant bonus (decreases pollution by 1 for each planted tree)
+            if (m_PreviousTreeCount < m_TreeCount)
             {
-                for (var _ = 0; _ < (treeCount - previousTreeCount); _++)
+                for (var _ = 0; _ < (m_TreeCount - m_PreviousTreeCount); _++)
                 {
-                    if (_previousPollution > 1 && _pollutionCount > 1)
+                    if (m_PreviousPollution > 1 && m_PollutionCount > 1)
                     {
-                        _previousPollution-=0.8f;
+                        m_PreviousPollution-=1.0f;
                     }
                 }
             }
 
-            previousTreeCount = treeCount;
+            m_PreviousTreeCount = m_TreeCount;
         }
         //     if (totalTreeCount != 0)
         //     {

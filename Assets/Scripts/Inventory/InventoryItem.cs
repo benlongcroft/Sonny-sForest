@@ -5,6 +5,9 @@ namespace Inventory
     [Serializable]
     public class InventoryItem
     {
+        /*
+         * Class to store multiple inventory item data
+         */
         public InventoryItemData Data { get; private set; }
         public int StackSize { get; private set; }
 

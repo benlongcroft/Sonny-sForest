@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 000
   displayName: Fovir Fir
-  exchangeValue: 0.2
+  exchangeValue: 0.35
   prefab: {fileID: 2381264490074033244, guid: ec398fbbb65624c59aa7c7531c6425fa, type: 3}

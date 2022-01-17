@@ -5,6 +5,9 @@ namespace Inventory
     [CreateAssetMenu(menuName = "Inventory Item Data")]
     public class InventoryItemData : ScriptableObject
     {
+        /*
+         * Scriptable object to hold the inventory item data
+         */
         public string id;
         public string displayName;
         public float exchangeValue;

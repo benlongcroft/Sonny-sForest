@@ -2,27 +2,28 @@ using System;
 using System.Collections.Generic;
 using Inventory;
 using UnityEngine;
-using Main;
-using Unity.Mathematics;
 using Random = System.Random;
 
 namespace Forest
 {
+    /*
+     * This controls a subplot, which contains the tree
+     */
     [Serializable]
     public class SubPlotController : MonoBehaviour
     {
         public int subPlotID;
-        public bool seeded = false;
-        public bool dead = false;
-        public int currentStage = 0;
+        public bool seeded;
+        public bool dead;
+        public int currentStage;
         
-        public float timer = 0;
-        public float lastTimer = 0;
+        public float timer;
+        public float lastTimer;
 
-        public int seedsDropped = 0;
-        public float lastSeedTimer = 0;
+        public int seedsDropped; //not necessary without GSO
+        public float lastSeedTimer;
         
-        private string[] _stages = {"seed", "seedling", "sapling", "tree", "ancient", "dead"};
+        private string[] m_Stages = {"seed", "seedling", "sapling", "tree", "ancient", "dead"};
 
         public InventorySystem myInventory;
         public SpriteRenderer treeSpriteRenderer;
@@ -30,9 +31,11 @@ namespace Forest
 
         private float GrowTime()
         {
-            var stageMultipliers = new Dictionary<string, float>(){ {"seed",0}, {"seedling", 0.1f}, {"sapling",0.2f}, {"tree", 0.3f}, {"ancient", 0.4f}};
+            /*
+             * Calculates the grow time of any given tree, at any given stage
+             */
+            var stageMultipliers = new Dictionary<string, float> { {"seed",0}, {"seedling", 0.1f}, {"sapling",0.2f}, {"tree", 0.3f}, {"ancient", 0.4f}};
             return treeController.lifespan * stageMultipliers[treeController.stage];
-            //key error here?
         }
 
 
@@ -41,13 +44,14 @@ namespace Forest
         {
             if (seeded && !dead)
             { 
+                //if tree is planted
                 timer = timer + Time.deltaTime;
                 float g = GrowTime() + (new Random().Next(-5, 5));
-                // Debug.Log((timer - lastTimer)+"/"+g);
                 if (timer - lastTimer >= g)
                 {
+                    //if grow time for stage has been exceeded
                     currentStage += 1;
-                    treeController.stage = _stages[currentStage];
+                    treeController.stage = m_Stages[currentStage];
                     
                     treeSpriteRenderer.sprite = treeController.SetSprite();
 
@@ -64,10 +68,9 @@ namespace Forest
             
             if (treeController.stage == "tree" || treeController.stage == "ancient")
             {
-                // Debug.Log(timer-lastSeedTimer+"/"+treeController.seedGrowthTime);
+                //seed dropping
                 if ((timer - lastSeedTimer) >= treeController.seedGrowthTime)
                 {
-                    Debug.Log("Added new seed!");
                     myInventory.Add(treeController.seedItem);
                     seedsDropped += 1;
                     lastSeedTimer = timer;
@@ -100,6 +103,9 @@ namespace Forest
 
         public void SetTree(TreeController t, int[] loc)
         {
+            /*
+             * converts seed from loadout into seedling in subplot
+             */
             treeController.efficiency = t.efficiency;
             treeController.lifespan = t.lifespan;
             treeController.seedGrowthTime = (int) (treeController.lifespan * 0.7f / 8);

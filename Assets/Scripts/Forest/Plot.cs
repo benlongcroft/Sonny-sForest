@@ -1,31 +1,24 @@
 using System.Collections.Generic;
-using AOT;
-using Main;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Forest
 {
     public class Plot : MonoBehaviour
+    /*
+     * Plot contains four subplots. It is part of a field.
+     */
     {
         public Field field;
         
         public List<SubPlotController> subPlots = new List<SubPlotController> {};
     
         public int plotID;
-
-        // void Update()
-        // {
-        //     for (var i = 0; i < 4; i += 1)
-        //     {
-        //         if (subPlots[i].treeController.stage == "tree" || subPlots[i].treeController.stage == "ancient")
-        //         {
-        //             droppedSeeds.Add(Instantiate(TreeController));
-        //         }
-        //     }
-        // }
+        
     
         public int ChoosePlot(TreeController treeControllerObj)
+        /*
+         * When Sonny attempts to plant a seed by a plot, this chooses the most available plot.
+         */
         {
             for(var i =0; i < 4; i ++)
             {
@@ -39,6 +32,9 @@ namespace Forest
         }
 
         public int ChopDownTree()
+        /*
+         * When Sonny attempts to chop down a dead tree, this chooses the tree to chop down
+         */
         {
             for (var i = 0; i < 4; i++)
             {

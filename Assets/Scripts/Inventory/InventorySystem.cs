@@ -7,12 +7,18 @@ namespace Inventory
 {
     public class InventorySystem : MonoBehaviour
     {
-        private Dictionary<InventoryItemData, InventoryItem> _itemDictionary;
+        /*
+         * Inventory system class for user
+         */
+        private Dictionary<InventoryItemData, InventoryItem> m_ItemDictionary;
         public List<InventoryItem> Inventory { get; private set; }
 
         public List<InventoryItemData> startSeeds;
         
         private void AddN(int n, InventoryItemData x)
+        /*
+         * Add multiple items at once to inventory
+         */
         {
             for (int i = 0; i < n; i++)
             {
@@ -24,11 +30,12 @@ namespace Inventory
         private void Awake()
         {
             Inventory = new List<InventoryItem>();
-            _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+            m_ItemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
             foreach (var item in startSeeds)
             {
                 switch (item.displayName)
                 {
+                    //Starting loadout
                     case "Money":
                         AddN(10, item);
                         break;
@@ -51,6 +58,10 @@ namespace Inventory
         }
         public int Find(string itemName)
         {
+            /*
+             * Find object in inventory
+             */
+            
             int i = 0;
             foreach (var item in Inventory)
             {
@@ -68,7 +79,7 @@ namespace Inventory
 
         public void Add(InventoryItemData referenceData)
         {
-            if (_itemDictionary.TryGetValue(referenceData, out var value))
+            if (m_ItemDictionary.TryGetValue(referenceData, out var value))
             {
                 value.AddToStack();
             }
@@ -76,19 +87,19 @@ namespace Inventory
             {
                 var newItem = new InventoryItem(referenceData);
                 Inventory.Add(newItem);
-                _itemDictionary.Add(referenceData, newItem);
+                m_ItemDictionary.Add(referenceData, newItem);
             }
         }
 
         public void Remove(InventoryItemData referenceData)
         {
-            if (!_itemDictionary.TryGetValue(referenceData, out var value)) return;
+            if (!m_ItemDictionary.TryGetValue(referenceData, out var value)) return;
             value.RemoveFromStack();
             // if (value.StackSize == 0)
             // {
             //     Inventory.Remove(value);
             //     _itemDictionary.Remove(referenceData);
-            // }
+            // } not needed as no findable items
         }
     }
 }

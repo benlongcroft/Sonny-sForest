@@ -40,10 +40,10 @@ namespace Main
                var unlockedFieldCount = CalculateUnlockedFieldCount();
                
                //difficulty
-               var f = 1.0f + (0.05f * (unlockedFieldCount - 1));
+               var f = 1.0f + (0.1f * (unlockedFieldCount - 1));
                
                //Field Score
-               var t = m_TotalEfficiency / (22 * unlockedFieldCount);
+               var t = m_TotalEfficiency / (20 * unlockedFieldCount);
                
                // calculate pollution count using formula created by Ben 
                m_PollutionCount = m_PreviousPollution + (f - t);
@@ -105,7 +105,8 @@ namespace Main
                 {
                     if (m_PreviousPollution > 1 && m_PollutionCount > 1)
                     {
-                        m_PreviousPollution-=1.0f;
+                        m_PreviousPollution-=2.0f;
+                        m_PollutionCount -= 2.0f;
                     }
                 }
             }

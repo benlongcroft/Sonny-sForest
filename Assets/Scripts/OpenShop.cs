@@ -75,7 +75,7 @@ namespace Main
             LoadOut.Instance.SetBalance(m_Balance);
 
             var fields = GETFieldCount();
-            fieldCost.text = m_FieldCosts[fields].ToString();
+            fieldCost.text = m_FieldCosts[fields-1].ToString();
         }
 
         private void Update()

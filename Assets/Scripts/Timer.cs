@@ -8,7 +8,8 @@ public class Timer : MonoBehaviour
     /*
      * Controls in-game timer
      */
-    private float m_Timer;
+    private static float m_Timer;
+    public bool stop;
 
     public Text timerText;
     // Start is called before the first frame update
@@ -17,13 +18,20 @@ public class Timer : MonoBehaviour
         m_Timer = 0;
     }
 
+    public string GETTimer()
+    {
+        return m_Timer.ToString();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        m_Timer = m_Timer + Time.deltaTime;
-        var minutes = (int) (m_Timer / 60);
-        var seconds = (int) (m_Timer % 60);
-        timerText.text = minutes+":"+seconds;
-
+        if (!stop)
+        {
+            m_Timer = m_Timer + Time.deltaTime;
+            var minutes = (int) (m_Timer / 60);
+            var seconds = (int) (m_Timer % 60);
+            timerText.text = minutes+":"+seconds; 
+        }
     }
 }

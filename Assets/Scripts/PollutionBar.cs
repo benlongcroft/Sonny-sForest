@@ -9,17 +9,19 @@ namespace Main
     public class PollutionBar : MonoBehaviour
     {
         public static PollutionBar Instance { get; private set; }
+        public Text loseScreenTime;
         public Image mask;
-        
+
+        public float Pollution { get; private set; }
         public GameObject loseScreen;
         public ParticleSystem factoryClouds;
-        private int m_Pollution = 0;
 
         private float m_OriginalSize;
         // Start is called before the first frame update
         void Awake()
         {
             Instance = this;
+            factoryClouds.Play();
             m_OriginalSize = mask.rectTransform.rect.width;
         }
         
@@ -28,20 +30,26 @@ namespace Main
         {
             if (pollution < 200)
             {
+                Pollution = pollution;
                 var rot = pollution*0.5f;
-                float rod = pollution/10;
+                var rod = pollution/10;
                 
                 var emission = factoryClouds.emission;
                 emission.rateOverTime = rot;
                 emission.rateOverDistance = rod;
-                
+                Debug.Log("ROT:" +rot);
+                Debug.Log("ROD: "+rod);
+
                 SetValue(pollution/200f);
             }
             else
             {
                 if (pollution > 1)
                 {
+                    var t = GameObject.Find("timer").GetComponent<Timer>();
+                    t.stop = true;
                     loseScreen.SetActive(true);
+                    loseScreenTime.text = t.GETTimer();
                 }
                 SetValue(1/200f);
             }

@@ -14,11 +14,14 @@ namespace Main
         public Field[] myForest = { };
         Animator m_Animator;
 
+        private bool cough = false;
         private Vector2 m_LookDirection = new Vector2(0,0);
         public float speed = 1.8f;
         private static readonly int MoveX = Animator.StringToHash("MoveX");
         private static readonly int MoveY = Animator.StringToHash("MoveY");
         private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int Cough = Animator.StringToHash("Cough");
+        private static readonly int CanCough = Animator.StringToHash("canCough");
 
         private void CheckNewSeeds()
         /*
@@ -100,7 +103,6 @@ namespace Main
                 m_LookDirection.Set(move.x, move.y);
                 m_LookDirection.Normalize();
             }
-            
             
             //animator movement settings
             m_Animator.SetFloat(MoveX, m_LookDirection.x);
